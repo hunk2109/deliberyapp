@@ -1,19 +1,19 @@
 import 'package:delivey/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:delivey/src/pages/register/register_controller.dart';
+import 'package:delivey/src/pages/client/update/client_update_controller.dart';
 import 'package:flutter/scheduler.dart';
 
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key key}): super(key: key);
+class ClientUpdatePage extends StatefulWidget {
+  const ClientUpdatePage({Key key}): super(key: key);
 
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  _ClientUpdatePageState createState() => _ClientUpdatePageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
-RegisterController _con = new RegisterController();
-@override
+class _ClientUpdatePageState extends State<ClientUpdatePage> {
+  UpdateController _con = new UpdateController();
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -302,10 +302,10 @@ RegisterController _con = new RegisterController();
     );
   }
 
-void refresh(){
-  setState((){
+  void refresh(){
+    setState((){
 
-  });
-}
+    });
+  }
 }
 
