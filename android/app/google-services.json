@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "369484766048",
+    "project_id": "deliberyapp-25166",
+    "storage_bucket": "deliberyapp-25166.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369484766048:android:70e2e2fda01c850637dc05",
+        "android_client_info": {
+          "package_name": "com.HY.delivey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "369484766048-s9587pne3kf96pcj8hc1cbkp7ot2sdfg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.HY.delivey",
+            "certificate_hash": "698cdb1c273b0661102bd6ce52359c98572ffca0"
+          }
+        },
+        {
+          "client_id": "369484766048-9j47h8dlighlrqf21e6i72aemlghslpb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFEFcDcvYNTOn7p-_WTqZSKdd4WHhrlNk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "369484766048-9j47h8dlighlrqf21e6i72aemlghslpb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
