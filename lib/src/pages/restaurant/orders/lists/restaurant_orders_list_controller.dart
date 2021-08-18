@@ -31,4 +31,9 @@ class RestaurentOrdersListController {
   gotoRoles(){
     Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false) ;
   }
+
+  void gotocategoriscreated(){
+
+    Navigator.pushNamed(context, 'restaurant/category/create');
+  }
 }

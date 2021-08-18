@@ -112,11 +112,17 @@ class _RestaurantOrdersListPage  extends State<RestaurantOrdersListPage > {
 
           _con.users != null ?
           _con.users.roles.length >1?
+
           ListTile(
             title: Text('Cambiar Rol'),
             trailing: Icon(Icons.person_outlined),
 
           ):Container():Container(),
+          ListTile(
+                  title: Text('Crear Categorias'),
+                  trailing: Icon(Icons.list_alt),
+                  onTap: _con.gotocategoriscreated,
+                  ),
           ListTile(
             title: Text('Cerrar Sesion'),
             trailing: Icon(Icons.power_settings_new),
