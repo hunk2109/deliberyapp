@@ -7,6 +7,7 @@ import 'package:delivey/src/pages/restaurant/orders/lists/restaurant_orders_list
 import 'src/pages/delibery/orders/list/delibery_orders_page.dart';
 import 'src/pages/roles/roles_pages.dart';
 import 'package:delivey/src/pages/client/update/client_update_page.dart';
+import 'package:delivey/src/pages/restaurant/category/create/restaurant_category_create_page.dart';
 
 
 
@@ -38,6 +39,7 @@ class _MyAppState extends State<MyApp> {
         'client/produts/list':(BuildContext context)=> ClientProdutsListPage(),
         'client/update':(BuildContext context)=> ClientUpdatePage(),
         'restaurant/orders/list':(BuildContext context)=> RestaurantOrdersListPage(),
+        'restaurant/category/create':(BuildContext context)=> RestaurantCategoryCreatePage(),
         'delibery/orders/list':(BuildContext context)=> DeliberyOrdersListPage(),
       },
       theme: ThemeData(

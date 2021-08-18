@@ -25,56 +25,29 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Editar Perfil'),
+      ),
       body: Container(
           width: double.infinity,
-          child: Stack(
-            children: [
-              Positioned(
-                  top: -80,
-                  left: -100,
-
-                  child:
-                  _CircleRegister()),
-              Positioned(
-                child: _TextRegister(),
-                top: 65,
-                left: 27,
-
-              ),  Positioned(
-                child: _IconBack(),
-                top: 53,
-                left: -5,
-
-              ),
-
-
-              Container(
-                width: double.infinity,
-                margin: EdgeInsets.only(top: 150),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      _ImgUser(),
-                      SizedBox(height: 30),
-                      _Textimail(),
-                      _TextName(),
-                      _TextLastName(),
-                      _TextPhone(),
-                      _TextPass(),
-                      _TextChetPass(),
-                      _ButtonRegister()
+          child:   SingleChildScrollView(
+      child: Column(
+      children: [
+      SizedBox(height: 30),
+      _ImgUser(),
+      _TextName(),
+      _TextLastName(),
+      _TextPhone(),
 
 
 
-                    ],
+      ],
 
-                  ),
-                ),
-              )
-
-            ],
-          )
+    ),
+    ),
       ),
+      bottomNavigationBar:       _ButtonRegister()
+      ,
 
     );
 
@@ -88,7 +61,7 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
           borderRadius: BorderRadius.circular(30)
       ),
       child: TextField(
-        controller: _con.emailcontroller,
+
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
 
@@ -198,7 +171,7 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
           borderRadius: BorderRadius.circular(30)
       ),
       child: TextField(
-        controller: _con.checkpasscontroller,
+
         obscureText: true,
         decoration: InputDecoration(
 
@@ -226,7 +199,7 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
           borderRadius: BorderRadius.circular(30)
       ),
       child: TextField(
-        controller: _con.passcontroller,
+
         obscureText: true,
         decoration: InputDecoration(
 
@@ -250,8 +223,8 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 50,vertical: 20),
       child: ElevatedButton(
-        onPressed: _con.isEnable ? _con.register:null,
-        child: Text('Registrar'),
+        onPressed: _con.isEnable ? _con.update:null,
+        child: Text('Actualizar Perfil'),
         style: ElevatedButton.styleFrom(
             primary: MyColors.prymaryColor,
             shape: RoundedRectangleBorder(
@@ -266,7 +239,10 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
     return GestureDetector(
       onTap: _con.showimgdialog,
       child: CircleAvatar(
-        backgroundImage: _con.imagefile != null ? FileImage(_con.imagefile): AssetImage('assets/img/user_profile.png'),
+        backgroundImage: _con.imagefile != null
+            ? FileImage(_con.imagefile)
+            :_con.user?.image != null ? NetworkImage(_con.user?.image ):
+        AssetImage('assets/img/user_profile.png'),
         radius: 60,
         backgroundColor: Colors.grey[200],
       ),

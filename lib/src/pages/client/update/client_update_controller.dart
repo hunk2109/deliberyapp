@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:delivey/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey/src/models/user.dart';
 import 'package:delivey/src/provider/user_provider.dart';
@@ -8,60 +8,60 @@ import 'package:delivey/src/utils/mysnackbar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:sn_progress_dialog/progress_dialog.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class UpdateController{
 
   BuildContext context;
-  TextEditingController emailcontroller = new TextEditingController();
+
   TextEditingController namecontroller = new TextEditingController();
   TextEditingController lastnamecontroller = new TextEditingController();
   TextEditingController phonecontroller = new TextEditingController();
-  TextEditingController passcontroller = new TextEditingController();
-  TextEditingController checkpasscontroller = new TextEditingController();
+
   UserProvider usersProvider = new UserProvider();
   PickedFile pickedFile;
   File imagefile;
   Function refresh;
   ProgressDialog _progressDialogl;
   bool isEnable = true;
+  Users user;
+  SharedPref _sharedPref = new SharedPref();
 
 
 
 
 
-  Future init(BuildContext context, Function refresh){
+  Future init(BuildContext context, Function refresh) async{
     this.context = context;
-    usersProvider.init(context);
     this.refresh = refresh;
     _progressDialogl = ProgressDialog(context: context);
+    user = Users.fromJson(await _sharedPref.read('user'));
+    usersProvider.init(context,token:user.sessionToken);
+
+
+    namecontroller.text = user.name;
+    lastnamecontroller.text = user.lastname;
+    phonecontroller.text = user.phone;
+    refresh();
+
 
   }
 
-  void register()async {
-    String email = emailcontroller.text.trim();
+  void update()async {
+
     String name =  namecontroller.text;
     String lastname = lastnamecontroller.text;
     String phone = phonecontroller.text.trim();
-    String pass = passcontroller.text.trim();
-    String checkpass = checkpasscontroller.text.trim();
 
-    if(email.isEmpty||name.isEmpty||lastname.isEmpty||phone.isEmpty||pass.isEmpty||checkpass.isEmpty){
+
+    if(name.isEmpty||lastname.isEmpty||phone.isEmpty){
 
       MySnackbar.show(context, 'Ingresa todos los campos');
 
       return;
     }
 
-    if(checkpass !=  pass){
-      MySnackbar.show(context, 'Contraseña y Confirmar no coinciden');
-      return;
 
-    }
-
-    if(pass.length<6){
-      MySnackbar.show(context, 'La Contraseña debe ser mas larga ');
-      return;
-    }
 
 
     if(imagefile == null){
@@ -69,30 +69,35 @@ class UpdateController{
       return;
     }
 
-    Users user= new Users(
+    Users  Myuser= new Users(
 
-      email: email,
+
+      id: user.id,
       name: name,
       lastname: lastname,
       phone: phone,
-      password:pass,
+      image: user.image,
+
 
     );
 
-    Stream stream = await usersProvider.createWithimg(user, imagefile);
-    stream.listen((res) {
+    Stream stream = await usersProvider.update(Myuser, imagefile);
+    stream.listen((res) async {
       _progressDialogl.close();
       //ResponseApi responseApi = await usersProvider.create(user);
       ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
       print('Respuesta: ${responseApi.toJson()}');
 
-      MySnackbar.show(context, responseApi.message);
+      //MySnackbar.show(context, responseApi.message);
 
 
 
       if(responseApi.succes = true){
+        user = await usersProvider.getByid(Myuser.id);
+        _sharedPref.save('user', user.toJson());
+        Fluttertoast.showToast(msg: responseApi.message);
         Future.delayed(Duration(seconds: 3),(){
-          Navigator.pushReplacementNamed(context, 'login');
+          Navigator.pushNamedAndRemoveUntil(context, 'client/produts/list', (route) => false);
         });
       }
 
