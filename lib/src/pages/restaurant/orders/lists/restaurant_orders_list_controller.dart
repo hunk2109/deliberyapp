@@ -35,5 +35,9 @@ class RestaurentOrdersListController {
   void gotocategoriscreated(){
 
     Navigator.pushNamed(context, 'restaurant/category/create');
+
+  }void gotocproductscreated(){
+
+    Navigator.pushNamed(context, 'restaurant/products/create');
   }
 }

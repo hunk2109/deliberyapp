@@ -1,3 +1,4 @@
+import 'package:delivey/src/pages/restaurant/products/create/restaurant_products_create_page.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey/src/pages/login/login_page.dart';
 import 'package:delivey/src/utils/my_colors.dart';
@@ -40,6 +41,7 @@ class _MyAppState extends State<MyApp> {
         'client/update':(BuildContext context)=> ClientUpdatePage(),
         'restaurant/orders/list':(BuildContext context)=> RestaurantOrdersListPage(),
         'restaurant/category/create':(BuildContext context)=> RestaurantCategoryCreatePage(),
+        'restaurant/products/create':(BuildContext context)=> RestaurantProductsCreatePage(),
         'delibery/orders/list':(BuildContext context)=> DeliberyOrdersListPage(),
       },
       theme: ThemeData(
