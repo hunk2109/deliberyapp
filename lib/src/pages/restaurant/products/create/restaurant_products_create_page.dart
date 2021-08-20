@@ -44,14 +44,14 @@ class _RestaurantProductsCreatePageState extends State<RestaurantProductsCreateP
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _cardImage(null, 1),
-                _cardImage(null, 2),
-                _cardImage(null, 3),
+                _cardImage(_con.imagefile1, 1),
+                _cardImage(_con.imagefile2, 2),
+                _cardImage(_con.imagefile3, 3),
 
               ],
             ),
           ),
-          _dropDowmCategories([])
+          _dropDowmCategories(_con.category)
         ],
       ),
       bottomNavigationBar: _ButtonCreate(),
@@ -150,28 +150,32 @@ class _RestaurantProductsCreatePageState extends State<RestaurantProductsCreateP
   }
 
   Widget _cardImage(File imageFile, int numberFile ){
-    return imageFile != null ?
-           Card(
-             elevation: 3.0,
-             child: Container(
-               height: 140,
-               width: MediaQuery.of(context).size.width*0.26,
-               child: Image.file(
-                 imageFile,
-                 fit: BoxFit.cover,
-               )
-             ),
-           )
-        :
-    Card(
-      elevation: 3.0,
-      child: Container(
-          height: 140,
-          width: MediaQuery.of(context).size.width*0.26,
-          child: Image(
-            image: AssetImage('assets/img/add_image.png'),
-            fit: BoxFit.cover,
-          )
+    return GestureDetector(
+      onTap:(){_con.showimgdialog(numberFile);
+      },
+      child: imageFile != null ?
+             Card(
+               elevation: 3.0,
+               child: Container(
+                 height: 140,
+                 width: MediaQuery.of(context).size.width*0.26,
+                 child: Image.file(
+                   imageFile,
+                   fit: BoxFit.cover,
+                 )
+               ),
+             )
+          :
+      Card(
+        elevation: 3.0,
+        child: Container(
+            height: 140,
+            width: MediaQuery.of(context).size.width*0.26,
+            child: Image(
+              image: AssetImage('assets/img/add_image.png'),
+              fit: BoxFit.cover,
+            )
+        ),
       ),
     );
   }
@@ -227,9 +231,13 @@ class _RestaurantProductsCreatePageState extends State<RestaurantProductsCreateP
                         fontSize: 16,),
 
                     ),
-                  items:[
-
-                  ],
+                  items: _dropDownItem(categories),
+                  value: _con.idCat,
+                  onChanged: (options){
+                    setState((){
+                      _con.idCat = options;
+                    });
+                  },
                 ),
               ),
 
@@ -239,6 +247,17 @@ class _RestaurantProductsCreatePageState extends State<RestaurantProductsCreateP
       ),
     );
 
+  }
+  List<DropdownMenuItem<String>>_dropDownItem(List<Category>categories){
+    List<DropdownMenuItem<String>> list = [];
+    categories.forEach((category) {
+      list.add(DropdownMenuItem(
+        child: Text(category.name),
+        value: category.id,
+      ));
+    });
+
+    return list;
   }
   Widget _ButtonCreate(){
     return Container(

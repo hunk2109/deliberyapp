@@ -45,7 +45,8 @@ class _MyAppState extends State<MyApp> {
         'delibery/orders/list':(BuildContext context)=> DeliberyOrdersListPage(),
       },
       theme: ThemeData(
-        primaryColor: MyColors.prymaryColor
+        primaryColor: MyColors.prymaryColor,
+        appBarTheme: AppBarTheme(elevation: 0)
       )
 
     );

@@ -1,14 +1,20 @@
+import 'package:delivey/src/models/categories.dart';
 import 'package:delivey/src/models/user.dart';
+import 'package:delivey/src/provider/products_provider.dart';
+import 'package:delivey/src/provider/categories_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey/src/utils/shared_pref.dart';
+import 'package:delivey/src/models/products.dart';
 
 class ClientProductsListController{
   BuildContext context;
   SharedPref _sharedPref = new SharedPref();
   GlobalKey<ScaffoldState> key = new GlobalKey<ScaffoldState>();
   Function refresh;
-
   Users users;
+  List<Category> categories = [];
+  ProductsProvider _productsProvider = new  ProductsProvider();
+  CategoriesProvider _categoriesProvider = new CategoriesProvider();
 
 
 
@@ -16,9 +22,22 @@ class ClientProductsListController{
     this.context = context;
     this.refresh = refresh;
     users = Users.fromJson(await _sharedPref.read('user'));
+    _categoriesProvider.init(context, users);
+    _productsProvider.init(context, users);
+    getCategories();
     refresh();
   }
 
+  Future<List<Products>> getProducts(String id_category) async{
+    return await _productsProvider.getAllCat(id_category);
+
+  }
+
+  void getCategories() async{
+
+    categories = await _categoriesProvider.getall();
+    refresh();
+  }
   logout(){
     _sharedPref.logout(context);
   }
