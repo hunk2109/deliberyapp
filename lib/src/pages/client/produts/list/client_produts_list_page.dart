@@ -4,6 +4,7 @@ import 'package:delivey/src/pages/client/produts/list/clint_products_list_contro
 import 'package:flutter/scheduler.dart';
 import 'package:delivey/src/utils/my_colors.dart';
 import 'package:delivey/src/models/categories.dart';
+import 'package:delivey/src/widgets/no_data_widgets.dart';
 
 
 
@@ -38,9 +39,9 @@ class _ClientProdutsListPageState extends State<ClientProdutsListPage> {
             actions: [_shopinbag()],
             flexibleSpace: Column(
               children: [
-                SizedBox(height: 40,),
+                SizedBox(height: 30,),
                 _menuDrawer(),
-                SizedBox(height: 40,),
+                SizedBox(height: 30,),
                 _textFieldSearch()
               ],
             ),
@@ -68,16 +69,33 @@ class _ClientProdutsListPageState extends State<ClientProdutsListPage> {
           children: _con.categories.map((Category category) {
                  return FutureBuilder(
                      future: _con.getProducts(category.id),
+
                      builder: (context, AsyncSnapshot<List<Products>> snapshot){
-                   return GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                     crossAxisCount: 2,
-                     childAspectRatio: 0.6,
-                   ),
-                       itemCount: snapshot.data?.length??0,
-                       itemBuilder: (_,index){
-                     return _carProduct(snapshot.data[index]);
-                   }
-                   );
+                       if(snapshot.hasData){
+                         if(snapshot.data.length > 0){
+                           return GridView.builder(
+                               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+
+                                 crossAxisCount: 2,
+                                 childAspectRatio: 0.7,
+                               ),
+                               itemCount: snapshot.data?.length??0,
+                               itemBuilder: (_,index){
+                                 return _carProduct(snapshot.data[index]);
+                               }
+                           );
+                         }
+                         else{
+                           return NodataWidget(text:'No hay Productos',
+
+                           );
+                         }
+                       }
+                       else{
+                         return NodataWidget(text:'No hay Productos',);
+                       }
+
+
                  }
                  );
             //_carProduct();
@@ -89,77 +107,82 @@ class _ClientProdutsListPageState extends State<ClientProdutsListPage> {
   }
 
   Widget _carProduct(Products products){
-    return Container(
-      height: 250,
-      child: Card(
-        elevation: 3.0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15)
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              top: -1.0,
-                right: 1.0,
-                child:
-                Container(
-              width: 40,
-              height: 40,
-              decoration:BoxDecoration(
-                color: MyColors.prymaryColor,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(15),
-                    topRight: Radius.circular(20)),
+    return GestureDetector(
+      onTap: (){
+        _con.openBottonSheet(products);
+      },
+      child: Container(
+        height: 250,
+        child: Card(
+          elevation: 3.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15)
+          ),
+          child: Stack(
+            children: [
+              Positioned(
+                top: -1.0,
+                  right: 1.0,
+                  child:
+                  Container(
+                width: 40,
+                height: 40,
+                decoration:BoxDecoration(
+                  color: MyColors.prymaryColor,
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15),
+                      topRight: Radius.circular(20)),
+                ),
+                      child: Icon(Icons.add, color: Colors.white,),
               ),
-                    child: Icon(Icons.add, color: Colors.white,),
-            ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
 
-                  margin: EdgeInsets.only(top:20),
-                  height: 150,
-                  width: MediaQuery.of(context).size.width*0.45,
-                  padding: EdgeInsets.all(20),
-                  child: FadeInImage(
-                    image: products.image1 != null
-                        ?NetworkImage(products.image1):
+                    margin: EdgeInsets.only(top:20),
+                    height: 150,
+                    width: MediaQuery.of(context).size.width*0.45,
+                    padding: EdgeInsets.all(20),
+                    child: FadeInImage(
+                      image: products.image1 != null
+                          ?NetworkImage(products.image1):
 
-                    AssetImage('assets/img/no-image.png'),
-                    fit: BoxFit.contain,
-                    fadeInDuration: Duration(milliseconds: 50),
-                    placeholder:AssetImage('assets/img/no-image.png'),
-                  ),
-
-                ),
-                Container(
-                  height: 40,
-                  margin:EdgeInsets.symmetric(horizontal: 20),
-                  child: Text(products.name ?? '',
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                  ),
-
-                ),
-                Spacer(),
-                Container(
-                  margin:EdgeInsets.symmetric(horizontal: 20,vertical: 15),
-                  child: Text('${products.price ?? 0}\$',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+                      AssetImage('assets/img/no-image.png'),
+                      fit: BoxFit.contain,
+                      fadeInDuration: Duration(milliseconds: 50),
+                      placeholder:AssetImage('assets/img/no-image.png'),
+                    ),
 
                   ),
+                  Container(
+                    height: 40,
+                    margin:EdgeInsets.symmetric(horizontal: 20),
+                    child: Text(products.name ?? '',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                    ),
+
                   ),
-                ),
-              ],
-            ),
-          ],
+                  Spacer(),
+                  Container(
+                    margin:EdgeInsets.symmetric(horizontal: 20,vertical: 15),
+                    child: Text('${products.price ?? 0}\$',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+
+                    ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -195,28 +218,31 @@ class _ClientProdutsListPageState extends State<ClientProdutsListPage> {
     );
   }
   Widget _shopinbag(){
-    return Stack(
-      children: [
-        Container(
-          margin: EdgeInsets.only(right: 15,top:13),
-          child: Icon(
-            Icons.shopping_bag_outlined,
-            color: Colors.black,
+    return GestureDetector(
+      onTap: _con.gotocheckorder,
+      child: Stack(
+        children: [
+          Container(
+            margin: EdgeInsets.only(right: 15,top:13),
+            child: Icon(
+              Icons.shopping_bag_outlined,
+              color: Colors.black,
+            ),
           ),
-        ),
-        Positioned(
-          right: 16,
-          top:15,
-          child: Container(
-          width: 9,
-          height: 9,
-          decoration: BoxDecoration(
-            color: Colors.green,
-            borderRadius: BorderRadius.all(Radius.circular(30))
+          Positioned(
+            right: 16,
+            top:15,
+            child: Container(
+            width: 9,
+            height: 9,
+            decoration: BoxDecoration(
+              color: Colors.green,
+              borderRadius: BorderRadius.all(Radius.circular(30))
+            ),
           ),
-        ),
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
   Widget _menuDrawer(){
@@ -320,6 +346,7 @@ class _ClientProdutsListPageState extends State<ClientProdutsListPage> {
       ),
     );
   }
+
 
   void refresh(){
     setState((){

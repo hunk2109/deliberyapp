@@ -5,6 +5,8 @@ import 'package:delivey/src/provider/categories_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey/src/utils/shared_pref.dart';
 import 'package:delivey/src/models/products.dart';
+import 'package:delivey/src/pages/client/produts/details/client_producst_details_controller.dart';
+import 'package:delivey/src/pages/client/produts/details/client_products_details_page.dart';
 
 class ClientProductsListController{
   BuildContext context;
@@ -38,6 +40,15 @@ class ClientProductsListController{
     categories = await _categoriesProvider.getall();
     refresh();
   }
+  
+  void openBottonSheet(Products products)
+  {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (context) => ClientProdctsDetailsPages(products:products  ,)
+    );
+  }
   logout(){
     _sharedPref.logout(context);
   }
@@ -51,5 +62,10 @@ class ClientProductsListController{
     Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false) ;
 } gotoUpdate(){
     Navigator.pushNamed(context, 'client/update') ;
+}
+
+void gotocheckorder(){
+  Navigator.pushNamed(context, 'client/orders/create') ;
+
 }
 }
