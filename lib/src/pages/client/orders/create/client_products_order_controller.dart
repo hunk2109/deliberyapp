@@ -55,5 +55,12 @@ class ClientProductsOrdersCreateController{
     gettotal();
 
 
+
+
+  }
+
+  void gotoddres(){
+    Navigator.pushNamed(context, 'client/address/list');
+
   }
 }

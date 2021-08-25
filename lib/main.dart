@@ -10,6 +10,9 @@ import 'src/pages/roles/roles_pages.dart';
 import 'package:delivey/src/pages/client/update/client_update_page.dart';
 import 'package:delivey/src/pages/restaurant/category/create/restaurant_category_create_page.dart';
 import 'package:delivey/src/pages/client/orders/create/client_products_order_create_page.dart';
+import 'package:delivey/src/pages/client/address/list/client_address_list_page.dart';
+import 'package:delivey/src/pages/client/address/create/client_address_create_page.dart';
+import 'package:delivey/src/pages/client/address/maps/client_address_map_page.dart';
 
 
 
@@ -39,6 +42,9 @@ class _MyAppState extends State<MyApp> {
         'register' :(BuildContext context) => RegisterPage(),
         'roles': (BuildContext context) => RolesPage(),
         'client/produts/list':(BuildContext context)=> ClientProdutsListPage(),
+        'client/address/list':(BuildContext context)=> ClientAddrressListePage(),
+        'client/address/create':(BuildContext context)=> ClientAddrressCreatePage(),
+        'client/address/maps':(BuildContext context)=> ClientAddrressMaptePage(),
         'client/orders/create':(BuildContext context)=> ClientOrdersCreatePge(),
         'client/update':(BuildContext context)=> ClientUpdatePage(),
         'restaurant/orders/list':(BuildContext context)=> RestaurantOrdersListPage(),
