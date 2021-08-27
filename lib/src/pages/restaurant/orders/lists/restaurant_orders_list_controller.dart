@@ -40,4 +40,9 @@ class RestaurentOrdersListController {
 
     Navigator.pushNamed(context, 'restaurant/products/create');
   }
+
+  void gotoCreateRest(){
+    Navigator.pushNamed(context, 'restaurant/create');
+
+  }
 }

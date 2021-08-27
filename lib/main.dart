@@ -13,6 +13,7 @@ import 'package:delivey/src/pages/client/orders/create/client_products_order_cre
 import 'package:delivey/src/pages/client/address/list/client_address_list_page.dart';
 import 'package:delivey/src/pages/client/address/create/client_address_create_page.dart';
 import 'package:delivey/src/pages/client/address/maps/client_address_map_page.dart';
+import 'package:delivey/src/pages/restaurant/create/restaurant_create_page.dart';
 
 
 
@@ -51,6 +52,8 @@ class _MyAppState extends State<MyApp> {
         'restaurant/category/create':(BuildContext context)=> RestaurantCategoryCreatePage(),
         'restaurant/products/create':(BuildContext context)=> RestaurantProductsCreatePage(),
         'delibery/orders/list':(BuildContext context)=> DeliberyOrdersListPage(),
+        'restaurant/create':(BuildContext context)=> RestaurantCreateePage(),
+
       },
       theme: ThemeData(
         primaryColor: MyColors.prymaryColor,

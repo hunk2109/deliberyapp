@@ -1,3 +1,4 @@
+import 'package:delivey/src/models/address.dart';
 import 'package:delivey/src/utils/my_colors.dart';
 import 'package:delivey/src/widgets/no_data_widgets.dart';
 import 'package:flutter/material.dart';
@@ -35,25 +36,37 @@ class _ClientAddrressListPageState extends State<ClientAddrressListePage> {
           iconsAdd(),
         ],
       ),
-      body: Container(
-        width: double.infinity,
-        child: Column(
-          children: [
-            _textSelectAdrres(),
-            Container(
-              margin: EdgeInsets.only(top: 30),
-                child:
-                NodataWidget(
-                    text:'Sin Direcciones, agrega una '
-                )
+      body: Stack(
+        children: [
+          Positioned( top:0,
+            child: _textSelectAdrres(),
+          ),
 
-            ),
-            _bottonNewAddres(),
-          ],
-        ),
+          Container(
+              margin: EdgeInsets.only(top: 70),
+              child: _listAdress()),
+        ],
       ),
       bottomNavigationBar: _bottonAddres(),
     );
+  }
+
+  Widget noAddress(){
+    return Column(
+
+      children: [
+        Container(
+            margin: EdgeInsets.only(top: 30),
+            child:
+            NodataWidget(
+                text:'Sin Direcciones, agrega una '
+            )
+
+        ),
+        _bottonNewAddres(),
+      ],
+    );
+
   }
 
   Widget _bottonNewAddres(){
@@ -73,13 +86,84 @@ class _ClientAddrressListPageState extends State<ClientAddrressListePage> {
       ),
     );
   }
+
+  Widget _listAdress(){
+    return FutureBuilder(
+        future: _con.getAddress(),
+
+        builder: (context, AsyncSnapshot<List<Address>> snapshot){
+          if(snapshot.hasData){
+            if(snapshot.data.length > 0){
+              return ListView.builder(
+
+                  itemCount: snapshot.data?.length??0,
+                  itemBuilder: (_,index){
+                    return _radioselectaddress(snapshot.data[index],index);
+                  }
+              );
+            }
+            else{
+              return noAddress();
+
+
+            }
+          }
+          else{
+            return noAddress();
+          }
+
+
+        }
+    );
+  }
+
+  Widget _radioselectaddress(Address address, int index){
+
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20,),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Radio(value: index, groupValue: _con.radiovalue, onChanged: _con.handleRadioValuesChange),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    address?.address ?? '',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+
+                    ),
+                  ),
+                  Text(
+                    address?.neightborhood ?? '',
+                    style: TextStyle(
+                      fontSize: 12,
+
+                    ),
+                  ),
+                ],
+              ),
+
+            ],
+          ),
+          Divider(
+            color: Colors.grey[400],
+          )
+        ],
+      ),
+    );
+
+  }
   Widget _bottonAddres(){
     return Container(
       height: 50,
       width: double.infinity,
       margin: EdgeInsets.symmetric(vertical: 30,horizontal: 50),
       child: ElevatedButton(
-        onPressed: (){},
+        onPressed: _con.createOrder,
         child: Text(
           'ACEPTAR'
         ),

@@ -140,7 +140,7 @@ class ClientAdrresMapController{
     Map<String, dynamic> data ={
       'address': addressName,
       'lat': addresslatlgn.latitude,
-      'lgn': addresslatlgn.longitude
+      'lng': addresslatlgn.longitude
     };
     Navigator.pop(context,data);
   }
