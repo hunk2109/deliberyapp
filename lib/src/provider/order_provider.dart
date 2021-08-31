@@ -23,9 +23,9 @@ class OrderProvider{
 
   }
 
-  /*Future<List<Address>> getall(String idUser) async {
+  Future<List<Order>> getByStatus(String status) async {
     try{
-      Uri url = Uri.http(_url, '$_api/findByUser/${idUser}');
+      Uri url = Uri.http(_url, '$_api/findByStatus/$status');
       Map<String, String> headers ={
         'Content-type':'application/json',
         'Authorization': sessionuser.sessionToken
@@ -39,8 +39,8 @@ class OrderProvider{
         new SharedPref().logout(context);
       }
       final data = json.decode(res.body); //categorias
-      Address address = Address.fromJsonList(data);
-      return address.toList;
+      Order order = Order.fromJsonList(data);
+      return order.toList;
 
 
     }
@@ -48,7 +48,7 @@ class OrderProvider{
       print('Error: $e');
       return [];
     }
-  }*/
+  }
   Future<ResponseApi> create(Order order ) async{
 
     try{
