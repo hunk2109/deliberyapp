@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 
-class RestaurantOrdersDetailsController{
+class DeliberyOrdersDetailsController{
   BuildContext context;
   Function refresh;
   Products products;
@@ -43,17 +43,14 @@ class RestaurantOrdersDetailsController{
   }
 
   void updateOrder() async{
-    if(idDelibery != null){
-      order.idDelibery = idDelibery;
-      ResponseApi responseApi = await _orderProvider.update(order);
+      ResponseApi responseApi = await _orderProvider.updatetoDel(order);
       Fluttertoast.showToast(msg: responseApi.message,toastLength: Toast.LENGTH_LONG);
       Navigator.pop(context,true);
 
-    }
 
-    else{
-      Fluttertoast.showToast(msg: 'Selecciona un Repartidor');
-    }
+
+
+
 
 
   }

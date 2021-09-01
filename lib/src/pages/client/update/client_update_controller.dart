@@ -36,7 +36,7 @@ class UpdateController{
     this.refresh = refresh;
     _progressDialogl = ProgressDialog(context: context);
     user = Users.fromJson(await _sharedPref.read('user'));
-    usersProvider.init(context,token:user.sessionToken);
+    usersProvider.init(context,sessionuser: user);
 
 
     namecontroller.text = user.name;

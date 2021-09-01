@@ -20,6 +20,7 @@ class RestaurentOrdersListController {
     'ENTREGADO',
   ];
   OrderProvider _orderProvider = new OrderProvider();
+  bool isUpdated;
 
 
 
@@ -38,11 +39,14 @@ class RestaurentOrdersListController {
     _sharedPref.logout(context);
   }
 
-  void openBottomSheet(Order order){
-    showMaterialModalBottomSheet(
+  void openBottomSheet(Order order)async{
+  isUpdated = await  showMaterialModalBottomSheet(
         context: context,
         builder: (context) => RestaurantOrdersDetailsPage(order: order)
     );
+  if(isUpdated){
+    refresh();
+  }
   }
   void openDrawer(){
     key.currentState.openDrawer();

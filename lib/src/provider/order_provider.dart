@@ -49,6 +49,32 @@ class OrderProvider{
       return [];
     }
   }
+  Future<List<Order>> getByStatusDelibery(String idDelibery,String status) async {
+    try{
+      Uri url = Uri.http(_url, '$_api/getByStatusDelibery/$idDelibery/$status');
+      Map<String, String> headers ={
+        'Content-type':'application/json',
+        'Authorization': sessionuser.sessionToken
+
+
+
+      };
+      final res = await http.get(url,headers:headers);
+      if(res.statusCode == 401){
+        Fluttertoast.showToast(msg: 'Sesion Expirada');
+        new SharedPref().logout(context);
+      }
+      final data = json.decode(res.body); //categorias
+      Order order = Order.fromJsonList(data);
+      return order.toList;
+
+
+    }
+    catch(e){
+      print('Error: $e');
+      return [];
+    }
+  }
   Future<ResponseApi> create(Order order ) async{
 
     try{
@@ -63,6 +89,67 @@ class OrderProvider{
 
       };
       final res = await http.post(url,headers:headers,body: BodyParams);
+      if(res.statusCode == 401){
+        Fluttertoast.showToast(msg: 'Sesion Expirada');
+        new SharedPref().logout(context);
+      }
+      final data = json.decode(res.body);
+      ResponseApi resapi = ResponseApi.fromJson(data);
+      return resapi;
+    }
+    catch(e){
+
+      print('Error: $e');
+      return null;
+
+    }
+
+  }
+  Future<ResponseApi> update(Order order ) async{
+
+    try{
+
+      Uri url = Uri.http(_url, '$_api/updatetoReady');
+      String BodyParams = json.encode(order);
+      Map<String, String> headers ={
+        'Content-type':'application/json',
+        'Authorization': sessionuser.sessionToken
+
+
+
+      };
+      final res = await http.put(url,headers:headers,body: BodyParams);
+      if(res.statusCode == 401){
+        Fluttertoast.showToast(msg: 'Sesion Expirada');
+        new SharedPref().logout(context);
+      }
+      final data = json.decode(res.body);
+      ResponseApi resapi = ResponseApi.fromJson(data);
+      return resapi;
+    }
+    catch(e){
+
+      print('Error: $e');
+      return null;
+
+    }
+
+  }
+
+  Future<ResponseApi> updatetoDel(Order order ) async{
+
+    try{
+
+      Uri url = Uri.http(_url, '$_api/updatetodel');
+      String BodyParams = json.encode(order);
+      Map<String, String> headers ={
+        'Content-type':'application/json',
+        'Authorization': sessionuser.sessionToken
+
+
+
+      };
+      final res = await http.put(url,headers:headers,body: BodyParams);
       if(res.statusCode == 401){
         Fluttertoast.showToast(msg: 'Sesion Expirada');
         new SharedPref().logout(context);

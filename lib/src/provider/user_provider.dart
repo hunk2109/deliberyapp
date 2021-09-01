@@ -18,11 +18,13 @@ class UserProvider{
 
   BuildContext context;
   String token;
+  Users sessionuser;
 
 
-  Future init(BuildContext context, {String token}){
+  Future init(BuildContext context, {Users sessionuser}){
     this.context = context;
-    this.token = token;
+    this.sessionuser = sessionuser;
+
   }
 
   Future<Users>getByid(String id) async{
@@ -30,7 +32,7 @@ class UserProvider{
       Uri url = Uri.http(_url, '$_api/getid/$id');
       Map<String, String> headers ={
         'Content-type':'application/json',
-         'Authorization': token
+         'Authorization': sessionuser.sessionToken
 
       };
 
@@ -53,6 +55,36 @@ class UserProvider{
     }
 
   }
+
+  Future<List<Users>>getByDelibery() async{
+    try{
+      Uri url = Uri.http(_url, '$_api/getdelibery');
+      Map<String, String> headers ={
+        'Content-type':'application/json',
+        'Authorization': sessionuser.sessionToken
+
+      };
+
+
+      final res = await http.get(url,headers:headers );
+
+      if(res.statusCode == 401){ // no autorizado
+        Fluttertoast.showToast(msg: 'Tu Sesion Expiro');
+        new SharedPref().logout(context);
+
+      }
+
+      final  data = json.decode(res.body);
+      Users user = Users.fromJsonList(data);
+      return user.toList;
+    }
+    catch(e){
+      print:('Error: $e');
+      return null;
+    }
+
+  }
+
   Future<Stream> update(Users user,File image) async{
     try{
       Uri url = Uri.http(_url, '$_api/update');

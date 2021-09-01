@@ -16,7 +16,7 @@ String orderToJson(Order data) => json.encode(data.toJson());
 class Order {
   String id;
   String idClient;
-  String aidDelibery;
+  String idDelibery;
   String idAddress;
   String status;
   double lat;
@@ -26,11 +26,12 @@ class Order {
   List<Order> toList = [];
   Users client;
   Address address;
+  Users delibery;
 
   Order({
     this.id,
     this.idClient,
-    this.aidDelibery,
+    this.idDelibery,
     this.idAddress,
     this.status,
     this.lat,
@@ -39,6 +40,7 @@ class Order {
     this.products,
     this.client,
     this.address,
+    this.delibery,
   });
 
 
@@ -46,7 +48,7 @@ class Order {
   factory Order.fromJson(Map<String, dynamic> json) => Order(
     id: json["id"] is int ?  json["id"].toString():  json["id"],
     idClient: json["id_client"],
-    aidDelibery: json["aid_delibery"],
+    idDelibery: json["id_delibery"],
     idAddress: json["id_address"],
     status: json["status"],
     lat: json["lat"] is String ? double.parse(json["lat"]):json["lat"] ,
@@ -55,6 +57,7 @@ class Order {
     products:json["products"]!= null ? List<Products>.from(json["products"].map((model) => Products.fromJson(model))) ?? []:[],
     client: json['client'] is String ? usersFromJson(json['client']): Users.fromJson(json['client'] ??[]),
     address: json['address'] is String ? addressFromJson(json['address']): Address.fromJson(json['address'] ??[]),
+    delibery: json['delibery'] is String ? usersFromJson(json['delibery']): Users.fromJson(json['delibery'] ??[]),
 
   );
 
@@ -69,7 +72,7 @@ class Order {
   Map<String, dynamic> toJson() => {
     "id": id,
     "id_client": idClient,
-    "aid_delibery": aidDelibery,
+    "id_delibery": idDelibery,
     "id_address": idAddress,
     "status": status,
     "lat": lat,
@@ -78,5 +81,6 @@ class Order {
     "products": products,
     "client": client,
     "address":address,
+    'delibery':delibery,
   };
 }

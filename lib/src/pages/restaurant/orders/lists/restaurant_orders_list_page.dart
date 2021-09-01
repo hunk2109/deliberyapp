@@ -4,6 +4,7 @@ import 'package:delivey/src/widgets/no_data_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey/src/pages/restaurant/orders/lists/restaurant_orders_list_controller.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:delivey/src/utils/relative_time_util.dart';
 
 class RestaurantOrdersListPage extends StatefulWidget {
 
@@ -154,7 +155,7 @@ class _RestaurantOrdersListPage  extends State<RestaurantOrdersListPage > {
                       margin: EdgeInsets.symmetric(vertical: 5),
                       width: double.infinity,
                       child: Text(
-                        'Pedido: ${order.timestamp}',
+                        'Pedido: ${RelativeTimeUtil.getRelativeTime(order.timestamp??'')}',
                         style: TextStyle(
                           fontSize: 13,
                         ),

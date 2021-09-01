@@ -140,7 +140,6 @@ class _ClientProdutsListPageState extends State<ClientProdutsListPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-
                     margin: EdgeInsets.only(top:20),
                     height: 150,
                     width: MediaQuery.of(context).size.width*0.45,
