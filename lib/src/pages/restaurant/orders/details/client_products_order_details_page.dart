@@ -158,7 +158,7 @@ class _RestaurantOrdersDetailsPageState extends State<RestaurantOrdersDetailsPag
             height: 40,
             width: 40,
             child: FadeInImage(
-              image: _con.order.delibery.sessionToken ?? '' != null
+              image: _con.order.delibery.image != null
                   ?NetworkImage( _con.order.delibery.image ??''):
 
               AssetImage('assets/img/no-image.png'),

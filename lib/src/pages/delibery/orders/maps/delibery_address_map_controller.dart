@@ -1,36 +1,62 @@
+import 'package:delivey/src/models/orders.dart';
+import 'package:delivey/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 import 'package:location/location.dart' as location;
+import 'package:delivey/src/api/enviroment.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:geolocator/geolocator.dart';
 
 class DeliberyAdrresMapController{
   BuildContext context;
   Function refresh;
   Position _position;
-
+  StreamSubscription _positionStream;
   String addressName;
   LatLng addresslatlgn;
 
   CameraPosition initPosition = CameraPosition(target: LatLng(19.3376678, -70.9381985),
-      zoom: 16
+      zoom: 15
   );
 
   Completer<GoogleMapController> _mapController = Completer();
   BitmapDescriptor deliberyMarker;
-  Map<MarkerId,Marker> markers = <MarkerId,Marker>{
+  BitmapDescriptor toMarker;
+  Map<MarkerId,Marker> markers = <MarkerId,Marker>{};
 
-
-  };
+  Order order;
+  Set<Polyline> polylines ={};
+  List<LatLng> points = [];
 
   Future init(BuildContext context, Function refresh) async{
     this.context = context;
     this.refresh = refresh;
+    order = Order.fromJson(ModalRoute.of(context).settings.arguments as Map<String, dynamic>);
     deliberyMarker = await createMarkerfromAsset('assets/img/delivery2.png');//
+    toMarker = await createMarkerfromAsset('assets/img/home.png');//
+    print('Orden: ${order.toJson()}');
     checkGps();
   }
 
+  Future<void> setPolylines(LatLng from,LatLng to) async{
+    PointLatLng pointfrom = PointLatLng(from.latitude, from.longitude);
+    PointLatLng pointto = PointLatLng(to.latitude, to.longitude);
+    PolylineResult result = await PolylinePoints().getRouteBetweenCoordinates(Enviroment.API_Delibery_Maps, pointfrom, pointto);
+    for(PointLatLng poin in result.points){
+      points.add(LatLng(poin.latitude,poin.longitude));
+    }
+
+    Polyline polyline = Polyline(polylineId: PolylineId('poly'),
+    color: MyColors.prymaryColor,
+    points: points,
+    width: 6);
+    polylines.add(polyline);
+    refresh();
+  }
   void addMarker(String markerid,double lat,double lng,String title,String content, BitmapDescriptor iconMarker){
 
     MarkerId id = MarkerId(markerid);
@@ -84,6 +110,13 @@ class DeliberyAdrresMapController{
     _mapController.complete(controller);
   }
 
+  void call(){
+    launch('tel://${order?.client?.phone}');
+  }
+
+  void dispose(){
+    _positionStream?.cancel();
+  }
   void updateLocation() async{
     try{
 
@@ -91,6 +124,26 @@ class DeliberyAdrresMapController{
       _position = await Geolocator.getLastKnownPosition(); //Lat y Lon
       animatedCamera(_position.latitude, _position.longitude);
       addMarker('Delibery', _position.latitude, _position.longitude, 'Tu Posicion', '', deliberyMarker);
+      addMarker('home', order.address.lat, order.address.lng, 'Entrega', '', toMarker);
+
+      LatLng from = new LatLng(_position.latitude, _position.longitude);
+      LatLng to = new LatLng(order.address.lat, order.address.lng);
+      setPolylines(from, to);
+
+      _positionStream = Geolocator.getPositionStream(desiredAccuracy: LocationAccuracy.best,
+      distanceFilter: 1).listen((Position position) {
+
+        _position = position;
+
+        addMarker('Delibery', _position.latitude, _position.longitude, 'Tu Posicion', '', deliberyMarker);
+
+        animatedCamera(_position.latitude, _position.longitude);
+
+        refresh();
+
+
+      });
+
     }
     catch(e){
       print('Error: $e');
@@ -118,7 +171,7 @@ class DeliberyAdrresMapController{
     if(controller != null){
       controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
         target: LatLng(lat,lon),
-        zoom: 12,
+        zoom: 15,
         bearing: 0,
       )));
     }

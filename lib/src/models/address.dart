@@ -13,7 +13,6 @@ class Address {
   String idUser;
   String address;
   String neightborhood;
-  String image1;
   double lat;
   double lng;
   List<Address> toList =[];
@@ -23,7 +22,6 @@ class Address {
     this.idUser,
     this.address,
     this.neightborhood,
-    this.image1,
     this.lat,
     this.lng,
   });
@@ -35,7 +33,6 @@ class Address {
     idUser: json["id_user"],
     address: json["address"],
     neightborhood: json["neightborhood"],
-    image1: json["image1"],
     lat: json["lat"] is String ? double.parse( json["lat"]): json["lat"].toDouble(),
     lng: json["lng"] is String ? double.parse( json["lng"]):json["lng"].toDouble(),
   );
@@ -52,7 +49,6 @@ class Address {
     "id_user": idUser,
     "address": address,
     "neightborhood": neightborhood,
-    "image1": image1,
     "lat": lat,
     "lng": lng,
   };

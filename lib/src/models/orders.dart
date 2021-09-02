@@ -54,10 +54,10 @@ class Order {
     lat: json["lat"] is String ? double.parse(json["lat"]):json["lat"] ,
     lng: json["lng"] is String ? double.parse(json["lng"]):json["lng"] ,
     timestamp: json["timestamp"] is String ? int.parse(json["timestamp"]): json["timestmap"],
-    products:json["products"]!= null ? List<Products>.from(json["products"].map((model) => Products.fromJson(model))) ?? []:[],
-    client: json['client'] is String ? usersFromJson(json['client']): Users.fromJson(json['client'] ??[]),
-    address: json['address'] is String ? addressFromJson(json['address']): Address.fromJson(json['address'] ??[]),
-    delibery: json['delibery'] is String ? usersFromJson(json['delibery']): Users.fromJson(json['delibery'] ??[]),
+    products:json["products"]!= null ? List<Products>.from(json["products"].map((model) => model  is Products ? model: Products.fromJson(model))) ?? []:[],
+    client: json['client'] is String ? usersFromJson(json['client']): json['client'] is Users ? json['client']: Users.fromJson(json['client'] ??[]),
+    address: json['address'] is String ? addressFromJson(json['address']): json['address'] is Address ? json['address']: Address.fromJson(json['address'] ??[]),
+    delibery: json['delibery'] is String ? usersFromJson(json['delibery']): json['delibery'] is Users ? json['delibery']: Users.fromJson(json['delibery'] ??[]),
 
   );
 
