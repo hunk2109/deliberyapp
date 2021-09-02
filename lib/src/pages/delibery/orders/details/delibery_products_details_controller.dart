@@ -45,7 +45,13 @@ class DeliberyOrdersDetailsController{
   void updateOrder() async{
       ResponseApi responseApi = await _orderProvider.updatetoDel(order);
       Fluttertoast.showToast(msg: responseApi.message,toastLength: Toast.LENGTH_LONG);
-      Navigator.pop(context,true);
+
+      if(responseApi.succes){
+
+        Navigator.pushNamed(context, 'delibery/orders/maps', arguments: order.toJson());
+      }
+
+
 
 
 

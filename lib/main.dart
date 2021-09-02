@@ -15,6 +15,7 @@ import 'package:delivey/src/pages/client/address/create/client_address_create_pa
 import 'package:delivey/src/pages/client/address/maps/client_address_map_page.dart';
 import 'package:delivey/src/pages/restaurant/create/restaurant_create_page.dart';
 import 'package:delivey/src/pages/restaurant/orders/details/client_products_order_details_page.dart';
+import 'package:delivey/src/pages/delibery/orders/maps/delibery_address_map_page.dart';
 
 
 
@@ -53,6 +54,7 @@ class _MyAppState extends State<MyApp> {
         'restaurant/category/create':(BuildContext context)=> RestaurantCategoryCreatePage(),
         'restaurant/products/create':(BuildContext context)=> RestaurantProductsCreatePage(),
         'delibery/orders/list':(BuildContext context)=> DeliberyOrdersListPage(),
+        'delibery/orders/maps':(BuildContext context)=> DeliberyAddrressMaptePage(),
         'restaurant/create':(BuildContext context)=> RestaurantCreateePage(),
         'restaurant/details':(BuildContext context)=> RestaurantOrdersDetailsPage(),
 
