@@ -222,7 +222,7 @@ class _RestaurantOrdersListPage  extends State<RestaurantOrdersListPage > {
 
                 children:[
                   Text(
-                    'Nombre de Usuario',
+                    '${_con.users?.name} ${_con.users?.lastname}',
                     style: TextStyle(
                         fontSize: 18,
                         color: Colors.white,
@@ -231,7 +231,7 @@ class _RestaurantOrdersListPage  extends State<RestaurantOrdersListPage > {
                     maxLines: 1,
                   ),
                   Text(
-                    'Correo',
+                    _con.users?.email,
                     style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey[300],
@@ -240,7 +240,7 @@ class _RestaurantOrdersListPage  extends State<RestaurantOrdersListPage > {
                     maxLines: 1,
                   ),
                   Text(
-                    'Telefono',
+                    _con.users?.phone,
                     style: TextStyle(
                         fontSize: 10,
                         color: Colors.grey[200],
@@ -253,7 +253,9 @@ class _RestaurantOrdersListPage  extends State<RestaurantOrdersListPage > {
                     height: 60,
                     margin: EdgeInsets.only(top: 10),
                     child: FadeInImage(
-                      image:AssetImage('assets/img/no-image.png'),
+                      image: _con.users?.image != null
+                          ? NetworkImage(_con.users?.image)
+                          : AssetImage('assets/img/no-image.png'),
                       fit:BoxFit.contain,
                       fadeInDuration: Duration(milliseconds: 50),
                       placeholder:AssetImage('assets/img/no-image.png'),

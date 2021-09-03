@@ -67,7 +67,7 @@ class _DeliberytOrdersDetailsPageState extends State<DeliberytOrdersDetailsPage>
 
                   '${RelativeTimeUtil.getRelativeTime(_con.order.timestamp??'')}'  ),
              // _textTotalPrice(),
-              _BottonConfirm(),
+              _con.order.status !='ENTREGADO' ? _BottonConfirm():Container(),
             ],
           ),
         ),
@@ -101,7 +101,8 @@ class _DeliberytOrdersDetailsPageState extends State<DeliberytOrdersDetailsPage>
         child: ElevatedButton(
           onPressed:_con.updateOrder,
           style: ElevatedButton.styleFrom(
-              primary: Colors.blue,
+              primary: _con.order?.status == 'LISTO' ? Colors.blue:
+              Colors.green,
               padding: EdgeInsets.symmetric(vertical: 5),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12)
@@ -117,7 +118,8 @@ class _DeliberytOrdersDetailsPageState extends State<DeliberytOrdersDetailsPage>
                   alignment: Alignment.center,
                   height: 40,
                   child: Text(
-                      'Iniciar Entrega',
+                      _con.order?.status == 'LISTO' ? 'Iniciar Entrega':
+                      'Ir al Mapa',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

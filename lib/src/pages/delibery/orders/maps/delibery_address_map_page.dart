@@ -70,7 +70,7 @@ class _DeliberyAddrressMaptePageState extends State<DeliberyAddrressMaptePage> {
     return Container(
         margin: EdgeInsets.only(left: 30,right: 30,top: 5,bottom: 5),
         child: ElevatedButton(
-          onPressed:(){},
+          onPressed: _con.updateToDelivered,
           style: ElevatedButton.styleFrom(
               primary: MyColors.prymaryColor,
               padding: EdgeInsets.symmetric(vertical: 5),

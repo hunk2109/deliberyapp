@@ -43,6 +43,7 @@ class DeliberyOrdersDetailsController{
   }
 
   void updateOrder() async{
+    if(order.status == 'LISTO'){
       ResponseApi responseApi = await _orderProvider.updatetoDel(order);
       Fluttertoast.showToast(msg: responseApi.message,toastLength: Toast.LENGTH_LONG);
 
@@ -52,10 +53,10 @@ class DeliberyOrdersDetailsController{
       }
 
 
-
-
-
-
+    }
+    else{
+      Navigator.pushNamed(context, 'delibery/orders/maps', arguments: order.toJson());
+    }
 
 
 

@@ -1,6 +1,12 @@
 import 'package:delivey/src/models/orders.dart';
+import 'package:delivey/src/models/response_api.dart';
+import 'package:delivey/src/models/user.dart';
+import 'package:delivey/src/provider/order_provider.dart';
 import 'package:delivey/src/utils/my_colors.dart';
+import 'package:delivey/src/utils/mysnackbar.dart';
+import 'package:delivey/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -31,6 +37,10 @@ class DeliberyAdrresMapController{
   Order order;
   Set<Polyline> polylines ={};
   List<LatLng> points = [];
+  OrderProvider _ordersProvider = new OrderProvider();
+  Users users;
+  SharedPref _sharedPref = new SharedPref();
+  double _deliberyPositionDistance;
 
   Future init(BuildContext context, Function refresh) async{
     this.context = context;
@@ -38,10 +48,41 @@ class DeliberyAdrresMapController{
     order = Order.fromJson(ModalRoute.of(context).settings.arguments as Map<String, dynamic>);
     deliberyMarker = await createMarkerfromAsset('assets/img/delivery2.png');//
     toMarker = await createMarkerfromAsset('assets/img/home.png');//
+    users = Users.fromJson(await _sharedPref.read('user'));
+    _ordersProvider.init(context, users);
     print('Orden: ${order.toJson()}');
     checkGps();
   }
 
+  void updateToDelivered() async{
+    if(_deliberyPositionDistance <= 200){
+
+      ResponseApi responseApi = await _ordersProvider.updatetoDelibered(order);
+      if(responseApi.succes){
+        Fluttertoast.showToast(msg: responseApi.message, toastLength: Toast.LENGTH_LONG);
+        Navigator.pushNamedAndRemoveUntil(context, 'delibery/orders/list', (route) => false);
+      }
+    }
+
+    else{
+      MySnackbar.show(context, 'Aun estas Demaciado lejos para confirmar la entrega');
+    }
+
+    print('Distancia: ${_deliberyPositionDistance}');
+
+
+  }
+
+  void isCloseToDelivered(){
+    _deliberyPositionDistance = Geolocator.distanceBetween(_position.latitude,
+        _position.longitude,
+        order.address.lat,
+        order.address.lng
+
+    );
+
+    print('Distancia: ${_deliberyPositionDistance}');
+  }
   Future<void> setPolylines(LatLng from,LatLng to) async{
     PointLatLng pointfrom = PointLatLng(from.latitude, from.longitude);
     PointLatLng pointto = PointLatLng(to.latitude, to.longitude);
@@ -138,6 +179,7 @@ class DeliberyAdrresMapController{
         addMarker('Delibery', _position.latitude, _position.longitude, 'Tu Posicion', '', deliberyMarker);
 
         animatedCamera(_position.latitude, _position.longitude);
+        isCloseToDelivered();
 
         refresh();
 
