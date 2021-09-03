@@ -1,3 +1,4 @@
+import 'package:delivey/src/pages/client/orders/maps/client_address_map_controller.dart';
 import 'package:delivey/src/utils/my_colors.dart';
 import 'package:delivey/src/widgets/no_data_widgets.dart';
 import 'package:flutter/material.dart';
@@ -5,14 +6,14 @@ import 'package:flutter/scheduler.dart';
 import 'package:delivey/src/pages/delibery/orders/maps/delibery_address_map_controller.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class DeliberyAddrressMaptePage extends StatefulWidget {
+class ClientAddrressMaptePage extends StatefulWidget {
   @override
-  _DeliberyAddrressMaptePageState createState() => _DeliberyAddrressMaptePageState();
+  _ClientAddrressMaptePageState createState() => _ClientAddrressMaptePageState();
 }
 
-class _DeliberyAddrressMaptePageState extends State<DeliberyAddrressMaptePage> {
+class _ClientAddrressMaptePageState extends State<ClientAddrressMaptePage> {
 
-  DeliberyAdrresMapController _con = new DeliberyAdrresMapController();
+  ClientAdrresMapController _con = new ClientAdrresMapController();
   @override
   void initState() {
     // TODO: implement initState

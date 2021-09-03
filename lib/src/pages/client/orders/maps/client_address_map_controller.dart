@@ -17,7 +17,7 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:geolocator/geolocator.dart';
 
-class DeliberyAdrresMapController{
+class ClientAdrresMapController{
   BuildContext context;
   Function refresh;
   Position _position;
