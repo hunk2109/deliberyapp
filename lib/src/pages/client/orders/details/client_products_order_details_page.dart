@@ -62,13 +62,13 @@ class _ClientOrdersDetailsPageState extends State<ClientOrdersDetailsPage>
               ),
 
 
-              _textClient('Cliente: ','${_con.order.client?.name??''} ${_con.order.client?.lastname??''}' ),
-              _textClient('Entregar en: ','${_con.order.address?.address ??''}'),
+              _textClient('Repartidor: ','${_con.order?.delibery?.name??'No asignado'} ${_con.order.delibery?.lastname??''}' ),
+              _textClient('Entregar en: ','${_con.order?.address?.address ??''}'),
               _textClient('Fecha del Pedido: ',
 
                   '${RelativeTimeUtil.getRelativeTime(_con.order.timestamp??'')}'  ),
              // _textTotalPrice(),
-              _con.order.status !='ENTREGADO' ? _BottonConfirm():Container(),
+              _con.order?.status =='EN CAMINO' ? _BottonConfirm():Container(),
             ],
           ),
         ),
@@ -102,8 +102,7 @@ class _ClientOrdersDetailsPageState extends State<ClientOrdersDetailsPage>
         child: ElevatedButton(
           onPressed:_con.updateOrder,
           style: ElevatedButton.styleFrom(
-              primary: _con.order?.status == 'LISTO' ? Colors.blue:
-              Colors.green,
+              primary: Colors.blue,
               padding: EdgeInsets.symmetric(vertical: 5),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12)
@@ -119,8 +118,7 @@ class _ClientOrdersDetailsPageState extends State<ClientOrdersDetailsPage>
                   alignment: Alignment.center,
                   height: 40,
                   child: Text(
-                      _con.order?.status == 'LISTO' ? 'Iniciar Entrega':
-                      'Ir al Mapa',
+                      'Seguir Orden',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

@@ -1,4 +1,5 @@
-import 'package:delivey/src/pages/client/orders/list/delibery_orders_page.dart';
+import 'package:delivey/src/pages/client/orders/list/client_orders_page.dart';
+import 'package:delivey/src/pages/client/orders/maps/client_address_map_page.dart';
 import 'package:delivey/src/pages/restaurant/products/create/restaurant_products_create_page.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey/src/pages/login/login_page.dart';
@@ -50,7 +51,7 @@ class _MyAppState extends State<MyApp> {
         'client/address/create':(BuildContext context)=> ClientAddrressCreatePage(),
         'client/address/maps':(BuildContext context)=> ClientAddrressMaptePage(),
         'client/orders/list':(BuildContext context)=> ClientOrdersListPage(),
-        'client/orders/maps':(BuildContext context)=> ClientAddrressMaptePage(),
+        'client/orders/maps':(BuildContext context)=> ClientMaptePage(),
         'client/orders/create':(BuildContext context)=> ClientOrdersCreatePge(),
         'client/update':(BuildContext context)=> ClientUpdatePage(),
         'restaurant/orders/list':(BuildContext context)=> RestaurantOrdersListPage(),

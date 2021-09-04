@@ -43,23 +43,8 @@ class ClientOrdersDetailsController{
   }
 
   void updateOrder() async{
-    if(order.status == 'LISTO'){
-      ResponseApi responseApi = await _orderProvider.updatetoDel(order);
-      Fluttertoast.showToast(msg: responseApi.message,toastLength: Toast.LENGTH_LONG);
 
-      if(responseApi.succes){
-
-        Navigator.pushNamed(context, 'delibery/orders/maps', arguments: order.toJson());
-      }
-
-
-    }
-    else{
-      Navigator.pushNamed(context, 'delibery/orders/maps', arguments: order.toJson());
-    }
-
-
-
+        Navigator.pushNamed(context, 'client/orders/maps', arguments: order.toJson());
   }
 
     void getuserd() async{

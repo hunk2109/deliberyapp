@@ -6,12 +6,12 @@ import 'package:flutter/scheduler.dart';
 import 'package:delivey/src/pages/delibery/orders/maps/delibery_address_map_controller.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class ClientAddrressMaptePage extends StatefulWidget {
+class ClientMaptePage extends StatefulWidget {
   @override
-  _ClientAddrressMaptePageState createState() => _ClientAddrressMaptePageState();
+  _ClientMaptePageState createState() => _ClientMaptePageState();
 }
 
-class _ClientAddrressMaptePageState extends State<ClientAddrressMaptePage> {
+class _ClientMaptePageState extends State<ClientMaptePage> {
 
   ClientAdrresMapController _con = new ClientAdrresMapController();
   @override
@@ -41,7 +41,7 @@ class _ClientAddrressMaptePageState extends State<ClientAddrressMaptePage> {
       body: Stack(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height*0.53 ,
+            height: MediaQuery.of(context).size.height*0.65 ,
               child: _googlemaps()
 
           ),
@@ -57,16 +57,7 @@ class _ClientAddrressMaptePageState extends State<ClientAddrressMaptePage> {
               ],
             ),
           ),
-          Positioned(
-              top: 40,
-              left: 15,
-              child: _googleMaps()
-          ),
-          Positioned(
-              top: 85,
-              left: 15,
-              child: _Waze()
-          ),
+
         ],
       ),
 
@@ -102,60 +93,11 @@ class _ClientAddrressMaptePageState extends State<ClientAddrressMaptePage> {
 
     );
   }
-  Widget _BottonConfirm(){
-    return Container(
-        margin: EdgeInsets.only(left: 30,right: 30,top: 5,bottom: 5),
-        child: ElevatedButton(
-          onPressed: _con.updateToDelivered,
-          style: ElevatedButton.styleFrom(
-              primary: MyColors.prymaryColor,
-              padding: EdgeInsets.symmetric(vertical: 5),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12)
-              )
 
-
-          ),
-          child: Stack(
-            children: [
-              Align(
-                alignment: Alignment.center,
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 40,
-                  child: Text(
-                      'Entregar Producto',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-
-                      )
-                  ),
-                ),
-              ),
-
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  margin: EdgeInsets.only(left: 50,top: 3),
-                  height: 30,
-                  child: Icon(Icons.check_circle,
-                      color: Colors.white,
-                      size: 30),
-                ),
-              ),
-
-
-
-            ],
-          ),
-        )
-    );
-  }
   Widget _carInfo(){
     return SingleChildScrollView(
       child: Container(
-        height: MediaQuery.of(context).size.height *0.47,
+        height: MediaQuery.of(context).size.height *0.35,
         width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -179,7 +121,6 @@ class _ClientAddrressMaptePageState extends State<ClientAddrressMaptePage> {
             _listInfo(_con.order?.address?.address??'', 'Direccion', Icons.location_on),
             Divider(color: Colors.grey[400],endIndent: 30, indent: 30,),
             _clientInfo(),
-            _BottonConfirm(),
 
 
           ],
@@ -196,8 +137,8 @@ class _ClientAddrressMaptePageState extends State<ClientAddrressMaptePage> {
             height: 50,
             width: 50,
             child: FadeInImage(
-              image: _con.order?.client?.image  != null
-                  ?NetworkImage(_con.order?.client?.image):
+              image: _con.order?.delibery?.image  != null
+                  ?NetworkImage(_con.order?.delibery?.image):
 
               AssetImage('assets/img/no-image.png'),
               fit: BoxFit.cover,
@@ -208,7 +149,7 @@ class _ClientAddrressMaptePageState extends State<ClientAddrressMaptePage> {
           ),
           Container(
             margin: EdgeInsets.only(left: 10),
-            child: Text('${_con.order?.client?.name??''} ${_con.order?.client?.lastname??''}',
+            child: Text('${_con.order?.delibery?.name??''} ${_con.order?.delibery?.lastname??''}',
             style:TextStyle(
              color: Colors.black,
               fontSize: 17,

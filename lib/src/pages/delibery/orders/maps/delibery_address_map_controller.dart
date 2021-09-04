@@ -16,6 +16,7 @@ import 'package:delivey/src/api/enviroment.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class DeliberyAdrresMapController{
   BuildContext context;
@@ -41,6 +42,7 @@ class DeliberyAdrresMapController{
   Users users;
   SharedPref _sharedPref = new SharedPref();
   double _deliberyPositionDistance;
+  IO.Socket socket;
 
   Future init(BuildContext context, Function refresh) async{
     this.context = context;
@@ -48,6 +50,11 @@ class DeliberyAdrresMapController{
     order = Order.fromJson(ModalRoute.of(context).settings.arguments as Map<String, dynamic>);
     deliberyMarker = await createMarkerfromAsset('assets/img/delivery2.png');//
     toMarker = await createMarkerfromAsset('assets/img/home.png');//
+    socket = IO.io('https://${Enviroment.API_Delibery}/orders/delibery',<String,dynamic>{
+      'transports':['websocket'],
+      'autoConnect':false,
+    });
+    socket.connect();
     users = Users.fromJson(await _sharedPref.read('user'));
     _ordersProvider.init(context, users);
     print('Orden: ${order.toJson()}');
@@ -82,6 +89,14 @@ class DeliberyAdrresMapController{
     } catch (e) {
       await launch(fallbackUrl, forceSafariVC: false, forceWebView: false);
     }
+  }
+  void emitposition(){
+    socket.emit('position', {
+      'id_order':order.id,
+      'lat':_position.latitude,
+      'lng':_position.longitude
+
+    });
   }
   void updateToDelivered() async{
     if(_deliberyPositionDistance <= 200){
@@ -186,6 +201,7 @@ class DeliberyAdrresMapController{
 
   void dispose(){
     _positionStream?.cancel();
+    socket?.disconnect();
   }
   void updateLocation() async{
     try{
@@ -204,6 +220,7 @@ class DeliberyAdrresMapController{
       distanceFilter: 1).listen((Position position) {
 
         _position = position;
+        emitposition();
 
         addMarker('Delibery', _position.latitude, _position.longitude, 'Tu Posicion', '', deliberyMarker);
 

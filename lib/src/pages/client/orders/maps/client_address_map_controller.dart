@@ -16,6 +16,8 @@ import 'package:delivey/src/api/enviroment.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+
 
 class ClientAdrresMapController{
   BuildContext context;
@@ -24,6 +26,8 @@ class ClientAdrresMapController{
   StreamSubscription _positionStream;
   String addressName;
   LatLng addresslatlgn;
+  IO.Socket socket;
+
 
   CameraPosition initPosition = CameraPosition(target: LatLng(19.3376678, -70.9381985),
       zoom: 15
@@ -48,6 +52,16 @@ class ClientAdrresMapController{
     order = Order.fromJson(ModalRoute.of(context).settings.arguments as Map<String, dynamic>);
     deliberyMarker = await createMarkerfromAsset('assets/img/delivery2.png');//
     toMarker = await createMarkerfromAsset('assets/img/home.png');//
+    socket = IO.io('https://${Enviroment.API_Delibery}/orders/delibery',<String,dynamic>{
+      'transports':['websocket'],
+      'autoConnect':false,
+    });
+    socket.connect();
+    socket.on('position/${order.id}', (data) {
+      print(data);
+        addMarker('Delibery', data['lat'], data['lng'], 'Tu Repartidor', '', deliberyMarker);
+
+  });
     users = Users.fromJson(await _sharedPref.read('user'));
     _ordersProvider.init(context, users);
     print('Orden: ${order.toJson()}');
@@ -185,7 +199,7 @@ class ClientAdrresMapController{
   }
 
   void dispose(){
-    _positionStream?.cancel();
+    socket?.disconnect();
   }
   void updateLocation() async{
     try{
@@ -200,20 +214,7 @@ class ClientAdrresMapController{
       LatLng to = new LatLng(order.address.lat, order.address.lng);
       setPolylines(from, to);
 
-      _positionStream = Geolocator.getPositionStream(desiredAccuracy: LocationAccuracy.best,
-      distanceFilter: 1).listen((Position position) {
-
-        _position = position;
-
-        addMarker('Delibery', _position.latitude, _position.longitude, 'Tu Posicion', '', deliberyMarker);
-
-        animatedCamera(_position.latitude, _position.longitude);
-        isCloseToDelivered();
-
-        refresh();
-
-
-      });
+      refresh();
 
     }
     catch(e){

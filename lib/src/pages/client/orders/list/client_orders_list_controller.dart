@@ -1,10 +1,10 @@
 import 'package:delivey/src/models/orders.dart';
 import 'package:delivey/src/models/user.dart';
+import 'package:delivey/src/pages/client/orders/details/client_products_order_details_page.dart';
 import 'package:delivey/src/provider/order_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey/src/utils/shared_pref.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:delivey/src/pages/delibery/orders/details/delibery_products_order_details_page.dart';
 
 
 class ClientOrdersListController {
@@ -42,7 +42,7 @@ class ClientOrdersListController {
   void openBottomSheet(Order order)async{
     isUpdated = await  showMaterialModalBottomSheet(
         context: context,
-        builder: (context) => DeliberytOrdersDetailsPage(order: order)
+        builder: (context) => ClientOrdersDetailsPage(order: order)
     );
     if(isUpdated){
       refresh();

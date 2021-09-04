@@ -160,7 +160,7 @@ class _ClientOrdersListPageState  extends State<ClientOrdersListPage> {
                       margin: EdgeInsets.symmetric(vertical: 5),
                       width: double.infinity,
                       child: Text(
-                        'Ciente: ${order.client?.name??''} ${order.client?.lastname??''}',
+                        'Repartidor: ${order.delibery?.name??'No asignado'} ${order.delibery?.lastname??''}',
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontSize: 13,
