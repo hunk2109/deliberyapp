@@ -27,7 +27,7 @@ class DeliberyAdrresMapController{
   LatLng addresslatlgn;
 
   CameraPosition initPosition = CameraPosition(target: LatLng(19.3376678, -70.9381985),
-      zoom: 15
+      zoom: 14
   );
 
   Completer<GoogleMapController> _mapController = Completer();
@@ -76,6 +76,11 @@ class DeliberyAdrresMapController{
     }
   }
 
+  void saveLocation() async{
+    order.lat = _position.latitude;
+    order.lng = _position.longitude;
+    await _ordersProvider.updatePosition(order);
+  }
   void launchGoogleMaps() async {
     var url = 'google.navigation:q=${order?.address?.lat.toString()},${order?.address?.lng.toString()}';
     var fallbackUrl =
@@ -208,6 +213,7 @@ class DeliberyAdrresMapController{
 
       await _determinePosition(); // determisr pocision y permisos
       _position = await Geolocator.getLastKnownPosition(); //Lat y Lon
+      saveLocation();
       animatedCamera(_position.latitude, _position.longitude);
       addMarker('Delibery', _position.latitude, _position.longitude, 'Tu Posicion', '', deliberyMarker);
       addMarker('home', order.address.lat, order.address.lng, 'Entrega', '', toMarker);
@@ -259,7 +265,7 @@ class DeliberyAdrresMapController{
     if(controller != null){
       controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
         target: LatLng(lat,lon),
-        zoom: 15,
+        zoom: 14,
         bearing: 0,
       )));
     }

@@ -30,7 +30,7 @@ class ClientAdrresMapController{
 
 
   CameraPosition initPosition = CameraPosition(target: LatLng(19.3376678, -70.9381985),
-      zoom: 15
+      zoom: 14
   );
 
   Completer<GoogleMapController> _mapController = Completer();
@@ -139,6 +139,7 @@ class ClientAdrresMapController{
     points: points,
     width: 6);
     polylines.add(polyline);
+
     refresh();
   }
   void addMarker(String markerid,double lat,double lng,String title,String content, BitmapDescriptor iconMarker){
@@ -205,12 +206,12 @@ class ClientAdrresMapController{
     try{
 
       await _determinePosition(); // determisr pocision y permisos
-      _position = await Geolocator.getLastKnownPosition(); //Lat y Lon
-      animatedCamera(_position.latitude, _position.longitude);
-      addMarker('Delibery', _position.latitude, _position.longitude, 'Tu Posicion', '', deliberyMarker);
+      //_position = await Geolocator.getLastKnownPosition(); //Lat y Lon
+      animatedCamera(order.lat, order.lng);
+      addMarker('Delibery', order.lat, order.lng, 'Posicion del Delibery', '', deliberyMarker);
       addMarker('home', order.address.lat, order.address.lng, 'Entrega', '', toMarker);
 
-      LatLng from = new LatLng(_position.latitude, _position.longitude);
+      LatLng from = new LatLng(order.lat, order.lng);
       LatLng to = new LatLng(order.address.lat, order.address.lng);
       setPolylines(from, to);
 
@@ -243,7 +244,7 @@ class ClientAdrresMapController{
     if(controller != null){
       controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
         target: LatLng(lat,lon),
-        zoom: 15,
+        zoom: 14,
         bearing: 0,
       )));
     }

@@ -53,16 +53,14 @@ OrderProvider _orderProvider = new OrderProvider();
       products: seletedPrducts,
 
     );
+
     ResponseApi responseApi = await _orderProvider.create(order);
 
-    if(responseApi.succes){
+
+    Navigator.pushNamed(context, 'client/payments/create');
       print('Respuesta: ${responseApi.message}');
 
-    }
-    else{
-      print('No hay Respuesta');
 
-    }
   }
   void handleRadioValuesChange(int value) async {
     radiovalue = value;

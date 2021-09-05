@@ -224,4 +224,34 @@ class OrderProvider{
     }
 
   }
+  Future<ResponseApi> updatePosition(Order order ) async{
+
+    try{
+
+      Uri url = Uri.http(_url, '$_api/updatetoPosition');
+      String BodyParams = json.encode(order);
+      Map<String, String> headers ={
+        'Content-type':'application/json',
+        'Authorization': sessionuser.sessionToken
+
+
+
+      };
+      final res = await http.put(url,headers:headers,body: BodyParams);
+      if(res.statusCode == 401){
+        Fluttertoast.showToast(msg: 'Sesion Expirada');
+        new SharedPref().logout(context);
+      }
+      final data = json.decode(res.body);
+      ResponseApi resapi = ResponseApi.fromJson(data);
+      return resapi;
+    }
+    catch(e){
+
+      print('Error: $e');
+      return null;
+
+    }
+
+  }
 }
