@@ -7,9 +7,8 @@ import 'package:delivey/src/provider/address_provider.dart';
 import 'package:delivey/src/provider/order_provider.dart';
 import 'package:delivey/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
-class ClientAdrresListController{
+class ClientPaymentListController{
   BuildContext context;
   Function refresh;
   List<Address> address = [];
@@ -55,19 +54,13 @@ OrderProvider _orderProvider = new OrderProvider();
 
     );
 
-
     ResponseApi responseApi = await _orderProvider.create(order);
 
 
-    _sharedPref.remove('order');
-    Fluttertoast.showToast(msg: 'Orden Creada');
-    gotoOrdersList();
+    Navigator.pushNamed(context, 'client/payments/create');
       print('Respuesta: ${responseApi.message}');
 
 
-  }
-  gotoOrdersList(){
-    Navigator.pushNamed(context, 'client/orders/list') ;
   }
   void handleRadioValuesChange(int value) async {
     radiovalue = value;

@@ -1,4 +1,4 @@
-import 'package:delivey/src/pages/client/payments/create/client_payments_controller.dart';
+import 'package:delivey/src/pages/client/payments/create/cc/client_payments_controller.dart';
 import 'package:delivey/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

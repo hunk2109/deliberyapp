@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:delivey/src/models/categories.dart';
 import 'package:delivey/src/models/user.dart';
 import 'package:delivey/src/provider/products_provider.dart';
@@ -17,6 +19,8 @@ class ClientProductsListController{
   List<Category> categories = [];
   ProductsProvider _productsProvider = new  ProductsProvider();
   CategoriesProvider _categoriesProvider = new CategoriesProvider();
+  Timer serchStopTyping;
+  String productName = '';
 
 
 
@@ -30,8 +34,15 @@ class ClientProductsListController{
     refresh();
   }
 
-  Future<List<Products>> getProducts(String id_category) async{
-    return await _productsProvider.getAllCat(id_category);
+  Future<List<Products>> getProducts(String id_category,String productname) async{
+    if(productName.isEmpty){
+      return await _productsProvider.getAllCat(id_category);
+
+    }
+    else {
+      return await _productsProvider.getAllCatandName(id_category, productname);
+    }
+
 
   }
 
@@ -58,6 +69,20 @@ class ClientProductsListController{
   }
 
 
+  void onChangetxt(String text){
+    Duration duration = Duration(milliseconds: 800);
+    if(serchStopTyping != null){
+      serchStopTyping.cancel();
+      refresh();
+    }
+    serchStopTyping = Timer(duration, () {
+      productName = text;
+      refresh();
+      print('Texto Completo: ${text}');
+    });
+
+
+  }
   gotoRoles(){
     Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false) ;
 }

@@ -48,6 +48,31 @@ class ProductsProvider {
       print('Error: $e');
       return [];
     }
+  }Future<List<Products>> getAllCatandName(String idCategory, String product_name) async {
+    try{
+      Uri url = Uri.http(_url, '$_api/findByCategoryandNamey/$idCategory/$product_name');
+      Map<String, String> headers ={
+        'Content-type':'application/json',
+        'Authorization': sessionuser.sessionToken
+
+
+
+      };
+      final res = await http.get(url,headers:headers);
+      if(res.statusCode == 401){
+        Fluttertoast.showToast(msg: 'Sesion Expirada');
+        new SharedPref().logout(context);
+      }
+      final data = json.decode(res.body); //categorias
+      Products products = Products.fromJsonList(data);
+      return products.toList;
+
+
+    }
+    catch(e){
+      print('Error: $e');
+      return [];
+    }
   }
   Future<Stream> create(Products products,List<File> images) async{
     try{

@@ -7,11 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:delivey/src/pages/client/address/maps/client_address_map_page.dart';
 import 'package:delivey/src/models/response_api.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geolocator/geolocator.dart';
 
 
 class ClientAdrresCreateController{
   BuildContext context;
   Function refresh;
+  double _deliberyPositionDistance;
 
 
   TextEditingController referenController = new TextEditingController();
@@ -29,6 +31,13 @@ class ClientAdrresCreateController{
     _addressProvider.init(context, users);
   }
 
+  /*void isCloseToDelivered(){
+    _deliberyPositionDistance = Geolocator.distanceBetween(_position.latitude,
+        _position.longitude,
+        order.address.lat,
+        order.address.lng
+
+    );*/
   void createeAddress() async {
     String addresstxt = adressController.text;
     String neighborotxt = neighborController.text;

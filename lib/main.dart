@@ -1,7 +1,10 @@
 import 'package:delivey/src/pages/client/orders/list/client_orders_page.dart';
 import 'package:delivey/src/pages/client/orders/maps/client_address_map_page.dart';
-import 'package:delivey/src/pages/client/payments/create/client_payments_page.dart';
+import 'package:delivey/src/pages/client/payments/create/cc/client_payments_page.dart';
 import 'package:delivey/src/pages/restaurant/products/create/restaurant_products_create_page.dart';
+import 'package:delivey/src/provider/push_notification_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey/src/pages/login/login_page.dart';
 import 'package:delivey/src/utils/my_colors.dart';
@@ -23,9 +26,20 @@ import 'package:delivey/src/pages/delibery/orders/maps/delibery_address_map_page
 
 
 
+PushNotificationProvider  pushNotificationProvider = new PushNotificationProvider();
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+  print('Handling a background message ${message.messageId}');
+}
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  pushNotificationProvider.initNotification();
   runApp(const MyApp());
 }
 
@@ -38,6 +52,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    pushNotificationProvider.onMensageLisent();
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
