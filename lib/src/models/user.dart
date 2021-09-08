@@ -14,9 +14,11 @@ class Users {
   String phone;
   String password;
   String sessionToken;
+  String notificationToken;
   String image;
   List<Rol> roles =[];
   List<Users> toList = [];
+
   
   Users({
     this.id,
@@ -26,8 +28,10 @@ class Users {
     this.phone,
     this.password,
     this.sessionToken,
+    this.notificationToken,
     this.image,
     this.roles,
+
 
   });
 
@@ -41,6 +45,7 @@ class Users {
     phone: json["phone"],
     password: json["password"],
     sessionToken: json["session_token"],
+    notificationToken: json["notification_token"],
     image: json["image"],
     roles: json["roles"]== null?[]:List<Rol>.from(json['roles'].map((model)=>Rol.fromJson(model)))??[],
   );
@@ -61,6 +66,7 @@ class Users {
     "phone": phone,
     "password": password,
     "session_token": sessionToken,
+    "notification_Token": notificationToken,
     "image": image,
     "roles": roles,
   };

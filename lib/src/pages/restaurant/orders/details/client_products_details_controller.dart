@@ -3,6 +3,7 @@ import 'package:delivey/src/models/products.dart';
 import 'package:delivey/src/models/response_api.dart';
 import 'package:delivey/src/models/user.dart';
 import 'package:delivey/src/provider/order_provider.dart';
+import 'package:delivey/src/provider/push_notification_provider.dart';
 import 'package:delivey/src/provider/user_provider.dart';
 import 'package:delivey/src/utils/mysnackbar.dart';
 import 'package:delivey/src/utils/shared_pref.dart';
@@ -26,6 +27,7 @@ class RestaurantOrdersDetailsController{
   UserProvider _usersProvider = new UserProvider();
   OrderProvider _orderProvider = new OrderProvider();
   String idDelibery;
+  PushNotificationProvider pushNotificationProvider = new PushNotificationProvider();
 
 
 
@@ -42,12 +44,22 @@ class RestaurantOrdersDetailsController{
 
   }
 
+  void sendNotifications(String tokennot){
+    Map<String, dynamic> data = {
+      'click_action':'FLUTTER_NOTIFICATION_CLICK'
+    };
+    pushNotificationProvider.sendMesage(tokennot, data, 'Pedido Asignado', 'Te han asignado un pedido');
+  }
   void updateOrder() async{
     if(idDelibery != null){
       order.idDelibery = idDelibery;
       ResponseApi responseApi = await _orderProvider.update(order);
+      Users deliberyUser = await _usersProvider.getByid(order.idDelibery);
+      print('Token: ${deliberyUser.notificationToken}');
+      sendNotifications(deliberyUser.notificationToken);
       Fluttertoast.showToast(msg: responseApi.message,toastLength: Toast.LENGTH_LONG);
       Navigator.pop(context,true);
+      refresh();
 
     }
 
@@ -68,7 +80,7 @@ class RestaurantOrdersDetailsController{
 
     order.products.forEach((product){
 
-      total = (product.price*product.quantity);
+      total = total + (product.price*product.quantity);
 
     });
 

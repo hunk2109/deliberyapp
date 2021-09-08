@@ -1,3 +1,4 @@
+import 'package:delivey/src/provider/push_notification_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey/src/provider/user_provider.dart';
 import 'package:delivey/src/models/response_api.dart';
@@ -12,6 +13,7 @@ class LoginController{
   TextEditingController passController = new TextEditingController();
   UserProvider userProvider = new UserProvider();
   SharedPref _sharedPref = new SharedPref();
+  PushNotificationProvider pushNotificationProvider = PushNotificationProvider();
 
 
   Future init(BuildContext context) async {
@@ -20,6 +22,8 @@ class LoginController{
     Users users = Users.fromJson(await _sharedPref.read('user')?? {});
 
     if(users?.sessionToken!= null){
+      pushNotificationProvider.saveToken(users,context);
+
       if(users.roles.length >1){
         Navigator.pushNamedAndRemoveUntil(context,'roles', (route) => false);
 
@@ -53,6 +57,8 @@ class LoginController{
       if(responseApi.succes = true ){
         Users user= Users.fromJson(responseApi.data);
         _sharedPref.save('user', user.toJson());
+        pushNotificationProvider.saveToken(user,context);
+
        print('LOG: ${user.toJson()}');
         if(user.roles.length >1){
           Navigator.pushNamedAndRemoveUntil(context,'roles', (route) => false);

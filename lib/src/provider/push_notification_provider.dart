@@ -1,6 +1,11 @@
+import 'dart:convert';
+
+import 'package:delivey/src/models/user.dart';
+import 'package:delivey/src/provider/user_provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:http/http.dart' as http;
 
 class PushNotificationProvider{
 
@@ -75,8 +80,35 @@ void onMensageLisent(){
   });
 }
 
-void saveToken(String idUser) async{
+void saveToken(Users users,BuildContext context) async{
   String token = await FirebaseMessaging.instance.getToken();
+  UserProvider userProvider = new UserProvider();
+  userProvider.init(context,sessionuser: users);
+  userProvider.updateToken(users.id, token);
+
+}
+
+Future<void> sendMesage(String to,Map<String, dynamic> data,String title,String body) async{
+  Uri uri = Uri.https('fcm.googleapis.com', '/fcm/send');
+  await http.post(uri,
+  headers: <String, String>{
+    'Content-Type':'application/json',
+    'Authorization': 'key=AAAAVgcCG2A:APA91bGWumPrfrC0cvYWaBPSrjhfrU6CwKnpBbBjIOZPcty412ujggLi1s9_2ASzOM9ktRwsFkwzaaj5riPUb84z2JS-lWQ8D10ppkd9R8cdt_SLnJ3TA9OMITlDB78AIhNAZueRTKOW',
+
+  },
+    body: jsonEncode(<String, dynamic>{
+      'notification':<String, dynamic>{
+        'body': body,
+        'title': title,
+
+      },
+      'priority':'high',
+      'ttl':'4500s',
+      'data': data,
+      'to': to
+
+    })
+  );
 
 }
 

@@ -57,7 +57,7 @@ class ClientOrdersDetailsController{
 
     order.products.forEach((product){
 
-      total = (product.price*product.quantity);
+      total = total + (product.price*product.quantity);
 
     });
 
