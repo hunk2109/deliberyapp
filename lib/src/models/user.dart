@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:delivey/src/models/restaurant.dart';
 import 'package:delivey/src/models/roles.dart';
+import 'package:delivey/src/provider/restaurant_provider.dart';
 
 Users usersFromJson(String str) => Users.fromJson(json.decode(str));
 
@@ -10,6 +12,7 @@ class Users {
   String id;
   String name;
   String lastname;
+  int idRestaurant;
   String email;
   String phone;
   String password;
@@ -18,12 +21,14 @@ class Users {
   String image;
   List<Rol> roles =[];
   List<Users> toList = [];
+  List<Restaurant> Res =[];
 
   
   Users({
     this.id,
     this.name,
     this.lastname,
+    this.idRestaurant,
     this.email,
     this.phone,
     this.password,
@@ -31,6 +36,7 @@ class Users {
     this.notificationToken,
     this.image,
     this.roles,
+    this.Res,
 
 
   });
@@ -38,16 +44,19 @@ class Users {
 
 
   factory Users.fromJson(Map<String, dynamic> json) => Users(
-    id: json["id"] is int ? json['id'].toString():  json["id"],
-    name: json["name"],
-    lastname: json["lastname"],
-    email: json["email"],
-    phone: json["phone"],
-    password: json["password"],
-    sessionToken: json["session_token"],
-    notificationToken: json["notification_token"],
-    image: json["image"],
-    roles: json["roles"]== null?[]:List<Rol>.from(json['roles'].map((model)=>Rol.fromJson(model)))??[],
+      id: json["id"] is int ? json['id'].toString():json["id"],
+      name: json["name"],
+      lastname: json["lastname"],
+      email: json["email"],
+      idRestaurant: json["id_resturant"] is int ? json["id_resturant"].toString():json["id_resturant"],
+      phone: json["phone"],
+      password: json["password"],
+      sessionToken: json["session_token"],
+      notificationToken: json["notification_token"],
+      image: json["image"],
+      roles: json["roles"]== null?[]:List<Rol>.from(json['roles'].map((model)=>Rol.fromJson(model)))??[],
+      Res: json["restaurant"] == null?[]:List<Restaurant>.from(json['restaurant'].map((model)=>Restaurant.fromJson(model)))??[]
+
   );
 
   Users.fromJsonList(List<dynamic> jsonList){
@@ -67,7 +76,10 @@ class Users {
     "password": password,
     "session_token": sessionToken,
     "notification_Token": notificationToken,
+    "id_resturant": idRestaurant,
     "image": image,
     "roles": roles,
+    "Res": Res,
   };
 }
+

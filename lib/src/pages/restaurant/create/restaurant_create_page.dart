@@ -1,3 +1,4 @@
+import 'package:delivey/src/models/biscategory.dart';
 import 'package:delivey/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey/src/pages/restaurant/create/reesurant_create_controller.dart';
@@ -12,7 +13,7 @@ class RestaurantCreateePage extends StatefulWidget {
 }
 
 class _RestaurantCreateePageState extends State<RestaurantCreateePage> {
-  UpdateController _con = new UpdateController();
+  RestaurantCreateController _con = new RestaurantCreateController();
   @override
   void initState() {
     // TODO: implement initState
@@ -28,22 +29,29 @@ class _RestaurantCreateePageState extends State<RestaurantCreateePage> {
       appBar: AppBar(
         title: Text('Agregar Negocio'),
       ),
-      body: Container(
-          width: double.infinity,
-          child:   SingleChildScrollView(
-      child: Column(
-      children: [
-      SizedBox(height: 30),
-      _ImgUser(),
-      _TextName(),
-      _TextLastName(),
+      body: ListView(
+        children: [
+          Container(
+              width: double.infinity,
+              child:   SingleChildScrollView(
+          child: Column(
+          children: [
+          SizedBox(height: 30),
+          _ImgUser(),
+          _TextName(),
+          _TextLastName(),
+            SizedBox(height: 30),
+
+            _dropdowCategory(_con.categories),
 
 
 
-      ],
+          ],
 
     ),
     ),
+          ),
+        ],
       ),
       bottomNavigationBar:       _ButtonRegister()
       ,
@@ -61,13 +69,14 @@ class _RestaurantCreateePageState extends State<RestaurantCreateePage> {
       ),
       child: TextField(
         controller: _con.namecontroller,
+        maxLength: 180,
         keyboardType: TextInputType.name,
         decoration: InputDecoration(
 
             hintStyle: TextStyle(
               color: MyColors.prymaryColorDark,
             ),
-            hintText: 'Nombre',
+            hintText: 'Nombre del Negocio  ',
             border: InputBorder.none,
             contentPadding: EdgeInsets.all(15),
             prefixIcon: Icon(
@@ -88,6 +97,8 @@ class _RestaurantCreateePageState extends State<RestaurantCreateePage> {
           borderRadius: BorderRadius.circular(30)
       ),
       child: TextField(
+        maxLines: 2,
+        maxLength: 180,
         controller: _con.lastnamecontroller,
         keyboardType: TextInputType.name,
         decoration: InputDecoration(
@@ -115,7 +126,7 @@ class _RestaurantCreateePageState extends State<RestaurantCreateePage> {
       margin: EdgeInsets.symmetric(horizontal: 50,vertical: 20),
       child: ElevatedButton(
         onPressed: _con.isEnable ? _con.update:null,
-        child: Text('Actualizar Perfil'),
+        child: Text('Actualizar Restaurant'),
         style: ElevatedButton.styleFrom(
             primary: MyColors.prymaryColor,
             shape: RoundedRectangleBorder(
@@ -152,6 +163,83 @@ class _RestaurantCreateePageState extends State<RestaurantCreateePage> {
     );
   }
 
+  Widget _dropdowCategory(List<Biscategories> categories){
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 33,),
+      child: Material(
+        elevation: 2.0,
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Icon(
+                      Icons.search,
+                      color: MyColors.prymaryColor,
+                    ),
+                  SizedBox(width: 15),
+                  Text(
+                      'Categorias de Negocio',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16
+                    ),
+                  ),
+
+
+
+
+
+                ],
+              ),
+
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: DropdownButton(
+                  underline: Container(
+                    alignment: Alignment.centerRight,
+                    child: Icon(
+                      Icons.arrow_drop_down_circle,
+                      color: MyColors.prymaryColor,
+                    ),
+                  ),
+                  elevation: 3,
+                  isExpanded: true,
+                  hint: Text('Seleciona una Categoria',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 16
+                  ),
+                  ),
+                  items: _droplist(categories),
+                  value: _con.idCategory,
+                  onChanged: (option){
+                    setState(() {
+                      _con.idCategory =option;//
+                    });
+                  },
+                ),
+              ),
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+  List<DropdownMenuItem<String>> _droplist(List<Biscategories> categories){
+    List<DropdownMenuItem<String>> list = [];
+    categories.forEach((items) {
+      list.add(DropdownMenuItem(
+        child: Text(items.name),
+      value: items.id,
+      ));
+    });
+    return list;
+  }
   Widget _IconBack(){
     return IconButton(onPressed: _con.back, icon: Icon(Icons.arrow_back_ios,color:Colors.white)
     );

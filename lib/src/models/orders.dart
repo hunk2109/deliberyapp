@@ -16,6 +16,8 @@ String orderToJson(Order data) => json.encode(data.toJson());
 class Order {
   String id;
   String idClient;
+  String idRestaurant;
+  String restName;
   String idDelibery;
   String idAddress;
   String status;
@@ -33,6 +35,8 @@ class Order {
     this.idClient,
     this.idDelibery,
     this.idAddress,
+    this.idRestaurant,
+    this.restName,
     this.status,
     this.lat,
     this.lng,
@@ -50,6 +54,8 @@ class Order {
     idClient: json["id_client"],
     idDelibery: json["id_delibery"],
     idAddress: json["id_address"],
+    idRestaurant: json["id_restaurant"],
+    restName: json["rest_name"],
     status: json["status"],
     lat: json["lat"] is String ? double.parse(json["lat"]):json["lat"] ,
     lng: json["lng"] is String ? double.parse(json["lng"]):json["lng"] ,
@@ -73,6 +79,8 @@ class Order {
     "id": id,
     "id_client": idClient,
     "id_delibery": idDelibery,
+    "id_restaurant": idRestaurant,
+    "rest_name": restName,
     "id_address": idAddress,
     "status": status,
     "lat": lat,

@@ -16,6 +16,7 @@ class Products {
   String image2;
   String image3;
   int idCategory;
+  int idRestaurant;
   double price;
   int quantity;
   List<Products> toList = [];
@@ -28,6 +29,7 @@ class Products {
     this.image2,
     this.image3,
     this.idCategory,
+    this.idRestaurant,
     this.price,
     this.quantity,
   });
@@ -42,6 +44,7 @@ class Products {
     image2: json["image2"],
     image3: json["image3"],
     idCategory: json["id_category"] is String ? int.parse(json["id_category"]):json["id_category"],
+    idRestaurant: json["id_restaurant"] is String ? int.parse(json["id_restaurant"]):json["id_restaurant"],
     price: json['price'] is String ? double.parse(json["price"]):isInteger( json["price"])? json["price"].toDouble():json["price"],
     quantity: json["quantity"],
   );
@@ -62,6 +65,7 @@ class Products {
     "image2": image2,
     "image3": image3,
     "id_category": idCategory,
+    "id_restaurant": idRestaurant,
     "price": price,
     "quantity": quantity,
   };

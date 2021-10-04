@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:delivey/src/api/enviroment.dart';
+import 'package:delivey/src/models/biscategory.dart';
 import 'package:delivey/src/models/response_api.dart';
 import 'package:delivey/src/utils/shared_pref.dart';
 import 'package:flutter/cupertino.dart';
@@ -47,6 +48,7 @@ class CategoriesProvider{
       return [];
     }
   }
+
   Future<ResponseApi> create(Category category ) async{
 
     try{

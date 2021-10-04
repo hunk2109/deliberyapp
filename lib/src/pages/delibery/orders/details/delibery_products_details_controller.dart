@@ -3,6 +3,7 @@ import 'package:delivey/src/models/products.dart';
 import 'package:delivey/src/models/response_api.dart';
 import 'package:delivey/src/models/user.dart';
 import 'package:delivey/src/provider/order_provider.dart';
+import 'package:delivey/src/provider/push_notification_provider.dart';
 import 'package:delivey/src/provider/user_provider.dart';
 import 'package:delivey/src/utils/mysnackbar.dart';
 import 'package:delivey/src/utils/shared_pref.dart';
@@ -25,8 +26,8 @@ class DeliberyOrdersDetailsController{
   Users user;
   UserProvider _usersProvider = new UserProvider();
   OrderProvider _orderProvider = new OrderProvider();
-  String idDelibery;
-
+  String idClient;
+  PushNotificationProvider pushNotificationProvider = new PushNotificationProvider();
 
 
   Future init(BuildContext context, Function refresh,Order order) async{
@@ -42,6 +43,12 @@ class DeliberyOrdersDetailsController{
 
   }
 
+  void sendNotifications(String tokennot){
+    Map<String, dynamic> data = {
+      'click_action':'FLUTTER_NOTIFICATION_CLICK'
+    };
+    pushNotificationProvider.sendMesage(tokennot, data, 'Pedido Asignado ', 'Tu pedido  a Salido  ');
+  }
   void updateOrder() async{
     if(order.status == 'LISTO'){
       ResponseApi responseApi = await _orderProvider.updatetoDel(order);
@@ -49,6 +56,10 @@ class DeliberyOrdersDetailsController{
 
       if(responseApi.succes){
 
+
+        Users idClientUser = await _usersProvider.getByid(order.idClient);
+        print('Token: ${idClientUser.notificationToken}');
+        sendNotifications(idClientUser.notificationToken);
         Navigator.pushNamed(context, 'delibery/orders/maps', arguments: order.toJson());
       }
 

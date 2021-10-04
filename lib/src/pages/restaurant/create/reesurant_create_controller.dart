@@ -1,4 +1,9 @@
 import 'dart:convert';
+import 'package:delivey/src/models/biscategory.dart';
+import 'package:delivey/src/models/restaurant.dart';
+import 'package:delivey/src/provider/biscategory_provider.dart';
+import 'package:delivey/src/provider/categories_provider.dart';
+import 'package:delivey/src/provider/restaurant_provider.dart';
 import 'package:delivey/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey/src/models/user.dart';
@@ -10,14 +15,15 @@ import 'dart:io';
 import 'package:sn_progress_dialog/progress_dialog.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class UpdateController{
+
+class RestaurantCreateController{
 
   BuildContext context;
 
   TextEditingController namecontroller = new TextEditingController();
   TextEditingController lastnamecontroller = new TextEditingController();
   TextEditingController phonecontroller = new TextEditingController();
-
+  RestaurantsProvider _restaurantsProvider =RestaurantsProvider();
   UserProvider usersProvider = new UserProvider();
   PickedFile pickedFile;
   File imagefile;
@@ -26,6 +32,10 @@ class UpdateController{
   bool isEnable = true;
   Users user;
   SharedPref _sharedPref = new SharedPref();
+  BiscategoriesPorvider biscategoriesPorvider = BiscategoriesPorvider();
+  List<Biscategories> categories = [];
+  String idCategory;
+
 
 
 
@@ -37,24 +47,34 @@ class UpdateController{
     _progressDialogl = ProgressDialog(context: context);
     user = Users.fromJson(await _sharedPref.read('user'));
     usersProvider.init(context, sessionuser: user);
-
-
-    namecontroller.text = 'Hola';//user.name;
-    lastnamecontroller.text = user.lastname;
-    phonecontroller.text = user.phone;
+    _restaurantsProvider.init(context,user);
+    biscategoriesPorvider.init(context, user);
+    getCategoriesBis();
     refresh();
+
+
+
+    /*namecontroller.text = user.name;
+    lastnamecontroller.text = user.lastname;
+    phonecontroller.text =  user.phone;*/
+
 
 
   }
 
+  void getCategoriesBis() async{
+    categories = await biscategoriesPorvider.getallbis();
+    refresh();
+
+  }
   void update()async {
 
     String name =  namecontroller.text;
-    String lastname = lastnamecontroller.text;
+    String desc = lastnamecontroller.text;
     String phone = phonecontroller.text.trim();
 
 
-    if(name.isEmpty||lastname.isEmpty||phone.isEmpty){
+    if(name.isEmpty||desc.isEmpty){
 
       MySnackbar.show(context, 'Ingresa todos los campos');
 
@@ -69,46 +89,41 @@ class UpdateController{
       return;
     }
 
-    Users  Myuser= new Users(
+    if(idCategory == null){
+      MySnackbar.show(context, 'Selecciona una Categoria');
+      return;
+    }
+
+    Restaurant restaurant = new  Restaurant(
 
 
-      id: user.id,
       name: name,
-      lastname: lastname,
-      phone: phone,
-      image: user.image,
+      description: desc,
+      //image1: 'Prueba1,',
+      idUser: user.id,
+      idCategory:idCategory,
+
 
 
     );
 
-    Stream stream = await usersProvider.update(Myuser, imagefile);
-    stream.listen((res) async {
+    print('${restaurant.toJson()}');
+
+    List<File> images = [];
+    images.add(imagefile);
+    _progressDialogl.show(max: 100, msg:'Espera un momento');
+    Stream stream  = await _restaurantsProvider.create(restaurant,imagefile);
+    stream.listen((res) {
       _progressDialogl.close();
-      //ResponseApi responseApi = await usersProvider.create(user);
-      ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
-      print('Respuesta: ${responseApi.toJson()}');
-
-      //MySnackbar.show(context, responseApi.message);
-
-
-
-      if(responseApi.succes = true){
-        user = await usersProvider.getByid(Myuser.id);
-        _sharedPref.save('user', user.toJson());
-        Fluttertoast.showToast(msg: responseApi.message);
-        Future.delayed(Duration(seconds: 3),(){
-          Navigator.pushNamedAndRemoveUntil(context, 'client/produts/list', (route) => false);
-        });
-      }
-
-      else{
-        isEnable = true;
-      }
-
-
-      _progressDialogl.show(max: 100, msg: 'Casi listo');
-      isEnable = false;
+      ResponseApi responseApi = new ResponseApi.fromJson(json.decode(res));
+      MySnackbar.show(context, responseApi.message);
     });
+
+
+
+
+
+
 
 
     /* print(email);

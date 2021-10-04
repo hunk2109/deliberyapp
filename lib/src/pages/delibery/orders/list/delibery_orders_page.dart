@@ -231,7 +231,7 @@ class _DeliberyOrdersListPageState  extends State<DeliberyOrdersListPage> {
                     maxLines: 1,
                   ),
                   Text(
-                    _con.users?.email,
+                    _con?.users?.email,
                     style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey[300],

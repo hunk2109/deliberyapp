@@ -31,6 +31,7 @@ class RestauranrProductsCreateController{
   ProductsProvider _productsProvider = ProductsProvider();
   Users user;
 
+
   //imagenes
   PickedFile pickedFile;
   File imagefile1;
@@ -80,10 +81,12 @@ class RestauranrProductsCreateController{
       description: description,
       price: price,
       idCategory: int.parse(idCat),
+      idRestaurant: int.parse(user.id),
 
 
 
     );
+    print;
 
     List<File> images = [];
     images.add(imagefile1);
