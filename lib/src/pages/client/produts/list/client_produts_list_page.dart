@@ -235,10 +235,12 @@ class _ClientProdutsListPageState extends State<ClientProdutsListPage> {
             child: Container(
             width: 9,
             height: 9,
-             decoration: BoxDecoration(
+             decoration:
+             _con.seletedPrducts.length >=1?
+             BoxDecoration(
               color: Colors.green,
               borderRadius: BorderRadius.all(Radius.circular(30))
-            ),
+            ):BoxDecoration(),
           ),
           ),
         ],

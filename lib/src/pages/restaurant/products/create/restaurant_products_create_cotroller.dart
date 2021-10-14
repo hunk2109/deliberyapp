@@ -30,6 +30,8 @@ class RestauranrProductsCreateController{
   CategoriesProvider _categoriesProvider = new CategoriesProvider();
   ProductsProvider _productsProvider = ProductsProvider();
   Users user;
+  String idRes;
+
 
 
   //imagenes
@@ -76,17 +78,21 @@ class RestauranrProductsCreateController{
     }
 
 
+
+
+    idRes = user.idRestaurant;
     Products products = new Products(
       name: name,
       description: description,
       price: price,
       idCategory: int.parse(idCat),
-      idRestaurant: int.parse(user.id),
+      idRestaurant: int.parse(user.idRestaurant),
 
 
 
     );
-    print;
+
+    print('valor: ${products.toJson()}');
 
     List<File> images = [];
     images.add(imagefile1);

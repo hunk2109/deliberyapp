@@ -281,17 +281,20 @@ class _RestaurantOrdersListPage  extends State<RestaurantOrdersListPage > {
                   trailing: Icon(Icons.list_alt),
                   onTap: _con.gotocategoriscreated,
           ),
+          _con.users != null ?
+          _con.users.idRestaurant.length < 1?
           ListTile(
             title: Text('Crear Negocio'),
             trailing: Icon(Icons.list_alt),
             onTap: _con.gotoCreateRest,
-          ),
-
+          ):Container():Container(),
+          _con.users != null ?
+          _con.users.idRestaurant.length >= 1?
           ListTile(
             title: Text('Crear Producto'),
             trailing: Icon(Icons.local_pizza),
             onTap: _con.gotocproductscreated,
-          ),
+          ):Container():Container(),
           ListTile(
             title: Text('Cerrar Sesion'),
             trailing: Icon(Icons.power_settings_new),

@@ -50,7 +50,7 @@ class ProductsProvider {
     }
   }Future<List<Products>> getAllCatandName(String idCategory, String product_name) async {
     try{
-      Uri url = Uri.http(_url, '$_api/findByCategoryandNamey/$idCategory/$product_name');
+      Uri url = Uri.http(_url, '$_api/findByCategoryandName/$idCategory/$product_name');
       Map<String, String> headers ={
         'Content-type':'application/json',
         'Authorization': sessionuser.sessionToken

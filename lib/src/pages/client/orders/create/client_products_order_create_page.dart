@@ -95,10 +95,10 @@ class _ClientOrdersCreatePgeState extends State<ClientOrdersCreatePge> {
                   margin: EdgeInsets.only(left: 70,top: 7),
                   height: 30,
                   child: Icon(Icons.check_circle,
-                  color: Colors.green,
-                  size: 30),
-                  ),
+                      color: Colors.green,
+                      size: 30),
                 ),
+              ),
 
 
 
@@ -117,8 +117,8 @@ class _ClientOrdersCreatePgeState extends State<ClientOrdersCreatePge> {
             height: 90,
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              color:Colors.grey[200]
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                color:Colors.grey[200]
             ),
             child:FadeInImage(
               image: products.image1 != null
@@ -135,9 +135,9 @@ class _ClientOrdersCreatePgeState extends State<ClientOrdersCreatePge> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(products.name?? '',
-              style: TextStyle(
-                fontWeight: FontWeight.bold
-              ),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold
+                ),
               ),
               SizedBox(height: 10,),
               _addorRemove(products),
@@ -165,7 +165,7 @@ class _ClientOrdersCreatePgeState extends State<ClientOrdersCreatePge> {
     return IconButton(
       onPressed:(){_con.deleteitems(products);},
       icon: Icon(Icons.delete,
-      color: MyColors.prymaryColor,),
+        color: MyColors.prymaryColor,),
     );
   }
   Widget _addremovpiece(Products products){
@@ -174,8 +174,8 @@ class _ClientOrdersCreatePgeState extends State<ClientOrdersCreatePge> {
       child: Text(
         '${products.price*products.quantity}',
         style: TextStyle(
-          color: Colors.grey,
-          fontWeight: FontWeight.bold
+            color: Colors.grey,
+            fontWeight: FontWeight.bold
         ),
       ),
     )   ;
@@ -194,10 +194,10 @@ class _ClientOrdersCreatePgeState extends State<ClientOrdersCreatePge> {
             ),
           ),
           Text('${_con.total}\$',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
           ),
         ],
       ),

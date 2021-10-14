@@ -45,13 +45,13 @@ class _RolesPageState extends State<RolesPage> {
 
   Widget _carRol(Rol rol) {
     return GestureDetector(
-       onTap:(){
-         try{{
-           goToPage(rol.route);
-         }
-       }
-       catch(e){print(e);
-       print(rol.route);}},
+      onTap:(){
+        try{{
+          goToPage(rol.route);
+        }
+        }
+        catch(e){print(e);
+        print(rol.route);}},
       child: Column(
         children: [
           Container(
@@ -86,3 +86,4 @@ class _RolesPageState extends State<RolesPage> {
     Navigator.pushNamedAndRemoveUntil(context, ruta, (route) => false);
   }
 }
+  

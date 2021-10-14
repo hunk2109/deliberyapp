@@ -21,6 +21,8 @@ class ClientProductsListController{
   CategoriesProvider _categoriesProvider = new CategoriesProvider();
   Timer serchStopTyping;
   String productName = '';
+  List<Products> seletedPrducts = [];
+
 
 
 
@@ -28,6 +30,7 @@ class ClientProductsListController{
     this.context = context;
     this.refresh = refresh;
     users = Users.fromJson(await _sharedPref.read('user'));
+    seletedPrducts = Products.fromJsonList(await _sharedPref.read('order')).toList;
     _categoriesProvider.init(context, users);
     _productsProvider.init(context, users);
     getCategories();
@@ -57,8 +60,10 @@ class ClientProductsListController{
     showModalBottomSheet(
         isScrollControlled: true,
         context: context,
-        builder: (context) => ClientProdctsDetailsPages(products:products  ,)
+        builder: (context) => ClientProdctsDetailsPages(products:products,)
+
     );
+    refresh();
   }
   logout(){
     _sharedPref.logout(context);
@@ -66,6 +71,7 @@ class ClientProductsListController{
 
   void openDrawer(){
     key.currentState.openDrawer();
+    refresh();
   }
 
 
@@ -75,7 +81,7 @@ class ClientProductsListController{
       serchStopTyping.cancel();
       refresh();
     }
-    serchStopTyping = Timer(duration, () {
+    serchStopTyping =  new Timer(duration, () {
       productName = text;
       refresh();
       print('Texto Completo: ${text}');

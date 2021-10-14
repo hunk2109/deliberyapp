@@ -12,7 +12,7 @@ class Users {
   String id;
   String name;
   String lastname;
-  int idRestaurant;
+  String idRestaurant;
   String email;
   String phone;
   String password;
@@ -42,20 +42,20 @@ class Users {
   });
 
 
-
+//recuerda enviar datos desde el Backend
   factory Users.fromJson(Map<String, dynamic> json) => Users(
       id: json["id"] is int ? json['id'].toString():json["id"],
       name: json["name"],
       lastname: json["lastname"],
       email: json["email"],
-      idRestaurant: json["id_resturant"] is int ? json["id_resturant"].toString():json["id_resturant"],
+      idRestaurant: json["id_res"]  is int ? json['id_res'].toString():json["id_res"],
       phone: json["phone"],
       password: json["password"],
       sessionToken: json["session_token"],
       notificationToken: json["notification_token"],
       image: json["image"],
       roles: json["roles"]== null?[]:List<Rol>.from(json['roles'].map((model)=>Rol.fromJson(model)))??[],
-      Res: json["restaurant"] == null?[]:List<Restaurant>.from(json['restaurant'].map((model)=>Restaurant.fromJson(model)))??[]
+      Res: json["restaurant"] != null ? List<Restaurant>.from(json["restaurant"].map((model) => model  is Restaurant ? model: Restaurant.fromJson(model))) ?? []:[],
 
   );
 
@@ -76,7 +76,7 @@ class Users {
     "password": password,
     "session_token": sessionToken,
     "notification_Token": notificationToken,
-    "id_resturant": idRestaurant,
+    "id_res": idRestaurant,
     "image": image,
     "roles": roles,
     "Res": Res,

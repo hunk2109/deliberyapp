@@ -26,12 +26,13 @@ class Restaurant {
     this.image1,
     this.idUser,
     this.idCategory,
+    this.toList,
   });
 
 
 
   factory Restaurant.fromJson(Map<String, dynamic> json) => Restaurant(
-    id: json["id"] is int ? json["id"].toString():json["id"],
+    id: json["id_res"] is int ? json["id_res"].toString():json["id_res"],
     name: json["name"],
     description: json["description"],
     image1: json["image1"],
@@ -48,7 +49,7 @@ class Restaurant {
   }
 
   Map<String, dynamic> toJson() => {
-    "id": id,
+    "id_res": id,
     "name": name,
     "description": description,
     "image1": image1,

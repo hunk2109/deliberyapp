@@ -23,25 +23,25 @@ class ClientProductsOrdersCreateController{
     seletedPrducts = Products.fromJsonList(await _sharedPref.read('order')).toList;
     refresh();
     gettotal();
-    }
+  }
 
-    void gettotal(){
+  void gettotal(){
     total = 0;
     seletedPrducts.forEach((producs) {
       total = total +(producs.quantity*producs.price);
     });
 
     refresh();
-    }
+  }
 
-    void additems(Products products){
-      int index = seletedPrducts.indexWhere((p) => p.id == products.id);
-      seletedPrducts[index].quantity = seletedPrducts[index].quantity +1;
-      _sharedPref.save('order', seletedPrducts);
-      gettotal();
+  void additems(Products products){
+    int index = seletedPrducts.indexWhere((p) => p.id == products.id);
+    seletedPrducts[index].quantity = seletedPrducts[index].quantity +1;
+    _sharedPref.save('order', seletedPrducts);
+    gettotal();
 
 
-    }void removitems(Products products){
+  }void removitems(Products products){
     if(products.quantity >1) {
       int index = seletedPrducts.indexWhere((p) => p.id == products.id);
       seletedPrducts[index].quantity = seletedPrducts[index].quantity - 1;
@@ -49,7 +49,7 @@ class ClientProductsOrdersCreateController{
       gettotal();
     }
 
-    }void deleteitems(Products products){
+  }void deleteitems(Products products){
     seletedPrducts.removeWhere((p) => p.id == products.id);
     _sharedPref.save('order', seletedPrducts);
     gettotal();
