@@ -1,7 +1,8 @@
-import 'package:delivey/src/utils/my_colors.dart';
+
+import 'package:delivery/src/pages/client/address/create/client_address_create_controller.dart';
+import 'package:delivery/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:delivey/src/pages/client/address/create/client_address_create_controller.dart';
 
 class ClientAddrressCreatePage extends StatefulWidget {
   @override
@@ -49,11 +50,11 @@ class _ClientAddrressCreatePageState extends State<ClientAddrressCreatePage> {
       child: TextField(
         controller: _con.adressController,
         decoration: InputDecoration(
-          labelText: 'Direccion',
-          suffixIcon: Icon(
-            Icons.location_on,
-            color: MyColors.prymaryColor,
-          )
+            labelText: 'Direccion',
+            suffixIcon: Icon(
+              Icons.location_on,
+              color: MyColors.prymaryColor,
+            )
         ),
       ),
     );
@@ -130,7 +131,7 @@ class _ClientAddrressCreatePageState extends State<ClientAddrressCreatePage> {
 
   void refresh(){
     setState(() {
-      
+
     });
   }
 }

@@ -1,9 +1,8 @@
-import 'package:delivey/src/pages/client/orders/maps/client_address_map_controller.dart';
-import 'package:delivey/src/utils/my_colors.dart';
-import 'package:delivey/src/widgets/no_data_widgets.dart';
+
+import 'package:delivery/src/pages/client/orders/maps/client_address_map_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:delivey/src/pages/delibery/orders/maps/delibery_address_map_controller.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ClientMaptePage extends StatefulWidget {

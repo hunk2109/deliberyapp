@@ -1,12 +1,11 @@
-import 'package:delivey/src/models/orders.dart';
-import 'package:delivey/src/models/products.dart';
-import 'package:delivey/src/models/user.dart';
-import 'package:delivey/src/pages/delibery/orders/details/delibery_products_details_controller.dart';
-import 'package:delivey/src/utils/my_colors.dart';
-import 'package:delivey/src/widgets/no_data_widgets.dart';
+import 'package:delivery/src/models/orders.dart';
+import 'package:delivery/src/models/products.dart';
+import 'package:delivery/src/pages/delibery/orders/details/delibery_products_details_controller.dart';
+import 'package:delivery/src/utils/relative_time_util.dart';
+import 'package:delivery/src/widgets/no_data_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:delivey/src/utils/relative_time_util.dart';
+
 
 class DeliberytOrdersDetailsPage extends StatefulWidget {
   Order order;
@@ -66,7 +65,7 @@ class _DeliberytOrdersDetailsPageState extends State<DeliberytOrdersDetailsPage>
               _textClient('Fecha del Pedido: ',
 
                   '${RelativeTimeUtil.getRelativeTime(_con.order.timestamp??'')}'  ),
-             // _textTotalPrice(),
+              // _textTotalPrice(),
               _con.order.status !='ENTREGADO' ? _BottonConfirm():Container(),
             ],
           ),
@@ -90,7 +89,7 @@ class _DeliberytOrdersDetailsPageState extends State<DeliberytOrdersDetailsPage>
       child: ListTile(
         title: Text(title),
         subtitle:Text(conten,
-        maxLines: 2,) ,
+          maxLines: 2,) ,
       ),
     );
   }
@@ -135,10 +134,10 @@ class _DeliberytOrdersDetailsPageState extends State<DeliberytOrdersDetailsPage>
                   margin: EdgeInsets.only(left: 50,top: 3),
                   height: 30,
                   child: Icon(Icons.directions_bike_outlined,
-                  color: Colors.white,
-                  size: 30),
-                  ),
+                      color: Colors.white,
+                      size: 30),
                 ),
+              ),
 
 
 
@@ -157,8 +156,8 @@ class _DeliberytOrdersDetailsPageState extends State<DeliberytOrdersDetailsPage>
             height: 50,
             padding: EdgeInsets.all(5),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              color:Colors.grey[200]
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                color:Colors.grey[200]
             ),
             child:FadeInImage(
               image: products.image1 != null
@@ -175,14 +174,14 @@ class _DeliberytOrdersDetailsPageState extends State<DeliberytOrdersDetailsPage>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(products.name?? '',
-              style: TextStyle(
-                fontWeight: FontWeight.bold
-              ),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold
+                ),
               ),
               SizedBox(height: 10,),
               Text('Cantidad: ${products?.quantity?? ''}',
                 style: TextStyle(
-                    fontSize: 13,
+                  fontSize: 13,
                 ),
               ),
 
@@ -214,10 +213,10 @@ class _DeliberytOrdersDetailsPageState extends State<DeliberytOrdersDetailsPage>
             ),
           ),
           Text('${_con.total}\$',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
           ),
         ],
       ),

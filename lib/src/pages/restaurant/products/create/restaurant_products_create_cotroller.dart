@@ -1,14 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:delivey/src/models/categories.dart';
-import 'package:delivey/src/models/products.dart';
-import 'package:delivey/src/models/response_api.dart';
-import 'package:delivey/src/models/user.dart';
-import 'package:delivey/src/provider/products_provider.dart';
-import 'package:delivey/src/utils/shared_pref.dart';
+
+import 'package:delivery/src/models/categories.dart';
+import 'package:delivery/src/models/products.dart';
+import 'package:delivery/src/models/response_api.dart';
+import 'package:delivery/src/models/user.dart';
+import 'package:delivery/src/provider/categories_provider.dart';
+import 'package:delivery/src/provider/products_provider.dart';
+import 'package:delivery/src/utils/mysnackbar.dart';
+import 'package:delivery/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
-import 'package:delivey/src/utils/mysnackbar.dart';
-import 'package:delivey/src/provider/categories_provider.dart';
+
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:core';

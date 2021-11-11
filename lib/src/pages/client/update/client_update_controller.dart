@@ -1,10 +1,12 @@
 import 'dart:convert';
-import 'package:delivey/src/utils/shared_pref.dart';
+
+import 'package:delivery/src/models/response_api.dart';
+import 'package:delivery/src/models/user.dart';
+import 'package:delivery/src/provider/user_provider.dart';
+import 'package:delivery/src/utils/mysnackbar.dart';
+import 'package:delivery/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
-import 'package:delivey/src/models/user.dart';
-import 'package:delivey/src/provider/user_provider.dart';
-import 'package:delivey/src/models/response_api.dart';
-import 'package:delivey/src/utils/mysnackbar.dart';
+
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:sn_progress_dialog/progress_dialog.dart';

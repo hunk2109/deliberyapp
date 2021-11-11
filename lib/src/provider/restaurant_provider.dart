@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:delivey/src/api/enviroment.dart';
-import 'package:delivey/src/models/response_api.dart';
-import 'package:delivey/src/models/restaurant.dart';
-import 'package:delivey/src/utils/shared_pref.dart';
+
+import 'package:delivery/src/api/enviroment.dart';
+import 'package:delivery/src/models/restaurant.dart';
+import 'package:delivery/src/models/user.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:delivey/src/models/user.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';

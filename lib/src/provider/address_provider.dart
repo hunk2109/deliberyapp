@@ -1,12 +1,14 @@
+
 import 'dart:convert';
 
-import 'package:delivey/src/api/enviroment.dart';
-import 'package:delivey/src/models/address.dart';
-import 'package:delivey/src/models/response_api.dart';
-import 'package:delivey/src/utils/shared_pref.dart';
+import 'package:delivery/src/api/enviroment.dart';
+import 'package:delivery/src/models/address.dart';
+import 'package:delivery/src/models/response_api.dart';
+import 'package:delivery/src/models/user.dart';
+import 'package:delivery/src/utils/shared_pref.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:delivey/src/models/user.dart';
-import 'package:delivey/src/models/categories.dart';
+
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 class AddressProvider{

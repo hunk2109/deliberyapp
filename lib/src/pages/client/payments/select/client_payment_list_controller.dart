@@ -1,11 +1,12 @@
-import 'package:delivey/src/models/address.dart';
-import 'package:delivey/src/models/orders.dart';
-import 'package:delivey/src/models/products.dart';
-import 'package:delivey/src/models/response_api.dart';
-import 'package:delivey/src/models/user.dart';
-import 'package:delivey/src/provider/address_provider.dart';
-import 'package:delivey/src/provider/order_provider.dart';
-import 'package:delivey/src/utils/shared_pref.dart';
+
+import 'package:delivery/src/models/address.dart';
+import 'package:delivery/src/models/orders.dart';
+import 'package:delivery/src/models/products.dart';
+import 'package:delivery/src/models/response_api.dart';
+import 'package:delivery/src/models/user.dart';
+import 'package:delivery/src/provider/address_provider.dart';
+import 'package:delivery/src/provider/order_provider.dart';
+import 'package:delivery/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 
 class ClientPaymentListController{

@@ -1,5 +1,6 @@
-import 'package:delivey/src/pages/client/payments/create/cc/client_payments_controller.dart';
-import 'package:delivey/src/utils/my_colors.dart';
+
+import 'package:delivery/src/pages/client/payments/create/cc/client_payments_controller.dart';
+import 'package:delivery/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_credit_card/credit_card_form.dart';

@@ -1,10 +1,11 @@
-import 'package:delivey/src/models/orders.dart';
-import 'package:delivey/src/models/user.dart';
-import 'package:delivey/src/provider/order_provider.dart';
+
+import 'package:delivery/src/models/orders.dart';
+import 'package:delivery/src/models/user.dart';
+import 'package:delivery/src/pages/delibery/orders/details/delibery_products_order_details_page.dart';
+import 'package:delivery/src/provider/order_provider.dart';
+import 'package:delivery/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
-import 'package:delivey/src/utils/shared_pref.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:delivey/src/pages/delibery/orders/details/delibery_products_order_details_page.dart';
 
 
 class DeliberyOrdersListController {

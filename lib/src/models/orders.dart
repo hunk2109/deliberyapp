@@ -1,12 +1,9 @@
-// To parse this JSON data, do
-//
-//     final order = orderFromJson(jsonString);
-
 import 'dart:convert';
 
-import 'package:delivey/src/models/address.dart';
-import 'package:delivey/src/models/products.dart';
-import 'package:delivey/src/models/user.dart';
+import 'package:delivery/src/models/address.dart';
+import 'package:delivery/src/models/products.dart';
+import 'package:delivery/src/models/user.dart';
+
 
 Order orderFromJson(String str) => Order.fromJson(json.decode(str));
 

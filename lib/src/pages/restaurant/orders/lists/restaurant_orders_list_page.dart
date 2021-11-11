@@ -1,10 +1,12 @@
-import 'package:delivey/src/models/orders.dart';
-import 'package:delivey/src/utils/my_colors.dart';
-import 'package:delivey/src/widgets/no_data_widgets.dart';
+
+import 'package:delivery/src/models/orders.dart';
+import 'package:delivery/src/pages/restaurant/orders/lists/restaurant_orders_list_controller.dart';
+import 'package:delivery/src/utils/my_colors.dart';
+import 'package:delivery/src/utils/relative_time_util.dart';
+import 'package:delivery/src/widgets/no_data_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:delivey/src/pages/restaurant/orders/lists/restaurant_orders_list_controller.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:delivey/src/utils/relative_time_util.dart';
+
 
 class RestaurantOrdersListPage extends StatefulWidget {
 

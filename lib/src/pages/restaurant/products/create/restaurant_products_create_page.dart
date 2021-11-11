@@ -1,8 +1,9 @@
-import 'package:delivey/src/models/categories.dart';
+
+import 'package:delivery/src/models/categories.dart';
+import 'package:delivery/src/pages/restaurant/products/create/restaurant_products_create_cotroller.dart';
+import 'package:delivery/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:delivey/src/utils/my_colors.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:delivey/src/pages/restaurant/products/create/restaurant_products_create_cotroller.dart';
 import 'dart:io';
 
 
@@ -154,17 +155,17 @@ class _RestaurantProductsCreatePageState extends State<RestaurantProductsCreateP
       onTap:(){_con.showimgdialog(numberFile);
       },
       child: imageFile != null ?
-             Card(
-               elevation: 3.0,
-               child: Container(
-                 height: 140,
-                 width: MediaQuery.of(context).size.width*0.26,
-                 child: Image.file(
-                   imageFile,
-                   fit: BoxFit.cover,
-                 )
-               ),
-             )
+      Card(
+        elevation: 3.0,
+        child: Container(
+            height: 140,
+            width: MediaQuery.of(context).size.width*0.26,
+            child: Image.file(
+              imageFile,
+              fit: BoxFit.cover,
+            )
+        ),
+      )
           :
       Card(
         elevation: 3.0,
@@ -206,10 +207,10 @@ class _RestaurantProductsCreatePageState extends State<RestaurantProductsCreateP
                   ),
                   SizedBox(width: 15,),
                   Text('Categorias',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 16,
-                  )
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16,
+                      )
                   )
                 ],
               ),
@@ -219,18 +220,18 @@ class _RestaurantProductsCreatePageState extends State<RestaurantProductsCreateP
                   underline:Container(
                     alignment: Alignment.centerRight,
                     child: Icon(
-                      Icons.arrow_drop_down_circle,
-                      color: MyColors.prymaryColor
+                        Icons.arrow_drop_down_circle,
+                        color: MyColors.prymaryColor
                     ),
                   ),
-                    elevation: 3,
-                    isExpanded: true,
-                    hint: Text(
-                      'Selecciona una Categoria',
-                      style: TextStyle(color: Colors.grey,
-                        fontSize: 16,),
+                  elevation: 3,
+                  isExpanded: true,
+                  hint: Text(
+                    'Selecciona una Categoria',
+                    style: TextStyle(color: Colors.grey,
+                      fontSize: 16,),
 
-                    ),
+                  ),
                   items: _dropDownItem(categories),
                   value: _con.idCat,
                   onChanged: (options){

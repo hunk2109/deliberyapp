@@ -1,6 +1,7 @@
-import 'package:delivey/src/utils/my_colors.dart';
+import 'package:delivery/src/pages/register/register_controller.dart';
+import 'package:delivery/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:delivey/src/pages/register/register_controller.dart';
+
 import 'package:flutter/scheduler.dart';
 
 
@@ -12,8 +13,8 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-RegisterController _con = new RegisterController();
-@override
+  RegisterController _con = new RegisterController();
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -302,10 +303,9 @@ RegisterController _con = new RegisterController();
     );
   }
 
-void refresh(){
-  setState((){
+  void refresh(){
+    setState((){
 
-  });
+    });
+  }
 }
-}
-

@@ -1,10 +1,12 @@
-import 'package:delivey/src/models/categories.dart';
-import 'package:delivey/src/models/response_api.dart';
-import 'package:delivey/src/models/user.dart';
-import 'package:delivey/src/utils/shared_pref.dart';
+
+import 'package:delivery/src/models/categories.dart';
+import 'package:delivery/src/models/response_api.dart';
+import 'package:delivery/src/models/user.dart';
+import 'package:delivery/src/provider/categories_provider.dart';
+import 'package:delivery/src/utils/mysnackbar.dart';
+import 'package:delivery/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
-import 'package:delivey/src/utils/mysnackbar.dart';
-import 'package:delivey/src/provider/categories_provider.dart';
+
 
 class RestauranrCategoryCreateControoler{
 
@@ -35,8 +37,8 @@ class RestauranrCategoryCreateControoler{
 
     }
     Category category = new Category(
-      name: name,
-      description:  description
+        name: name,
+        description:  description
     );
 
     ResponseApi responseApi = await _categoriesProvider.create(category);

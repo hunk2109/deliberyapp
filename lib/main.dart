@@ -1,28 +1,29 @@
-import 'package:delivey/src/pages/client/orders/list/client_orders_page.dart';
-import 'package:delivey/src/pages/client/orders/maps/client_address_map_page.dart';
-import 'package:delivey/src/pages/client/payments/create/cc/client_payments_page.dart';
-import 'package:delivey/src/pages/restaurant/products/create/restaurant_products_create_page.dart';
-import 'package:delivey/src/provider/push_notification_provider.dart';
+import 'package:delivery/src/pages/client/address/create/client_address_create_page.dart';
+import 'package:delivery/src/pages/client/address/list/client_address_list_page.dart';
+import 'package:delivery/src/pages/client/address/maps/client_address_map_page.dart';
+import 'package:delivery/src/pages/client/orders/create/client_products_order_create_page.dart';
+import 'package:delivery/src/pages/client/orders/list/client_orders_page.dart';
+import 'package:delivery/src/pages/client/orders/maps/client_address_map_page.dart';
+import 'package:delivery/src/pages/client/payments/create/cc/client_payments_page.dart';
+import 'package:delivery/src/pages/client/produts/list/client_produts_list_page.dart';
+import 'package:delivery/src/pages/client/update/client_update_page.dart';
+import 'package:delivery/src/pages/delibery/orders/maps/delibery_address_map_page.dart';
+import 'package:delivery/src/pages/login/login_page.dart';
+import 'package:delivery/src/pages/restaurant/category/create/restaurant_category_create_page.dart';
+import 'package:delivery/src/pages/restaurant/create/restaurant_create_page.dart';
+import 'package:delivery/src/pages/restaurant/orders/details/client_products_order_details_page.dart';
+import 'package:delivery/src/pages/restaurant/orders/lists/restaurant_orders_list_page.dart';
+import 'package:delivery/src/pages/restaurant/products/create/restaurant_products_create_page.dart';
+import 'package:delivery/src/provider/push_notification_provider.dart';
+import 'package:delivery/src/utils/my_colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:delivey/src/pages/login/login_page.dart';
-import 'package:delivey/src/utils/my_colors.dart';
+
 import 'src/pages/register/regis_page.dart';
-import 'package:delivey/src/pages/client/produts/list/client_produts_list_page.dart';
-import 'package:delivey/src/pages/restaurant/orders/lists/restaurant_orders_list_page.dart';
+
 import 'src/pages/delibery/orders/list/delibery_orders_page.dart';
 import 'src/pages/roles/roles_pages.dart';
-import 'package:delivey/src/pages/client/update/client_update_page.dart';
-import 'package:delivey/src/pages/restaurant/category/create/restaurant_category_create_page.dart';
-import 'package:delivey/src/pages/client/orders/create/client_products_order_create_page.dart';
-import 'package:delivey/src/pages/client/address/list/client_address_list_page.dart';
-import 'package:delivey/src/pages/client/address/create/client_address_create_page.dart';
-import 'package:delivey/src/pages/client/address/maps/client_address_map_page.dart';
-import 'package:delivey/src/pages/restaurant/create/restaurant_create_page.dart';
-import 'package:delivey/src/pages/restaurant/orders/details/client_products_order_details_page.dart';
-import 'package:delivey/src/pages/delibery/orders/maps/delibery_address_map_page.dart';
-
 
 
 
@@ -61,7 +62,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Delibery',
+      title: 'Delivery',
       initialRoute: 'login',
       routes: {
         'login' :(BuildContext context) => Loginpage(),

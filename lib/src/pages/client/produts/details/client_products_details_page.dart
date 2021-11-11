@@ -1,13 +1,15 @@
-import 'package:delivey/src/models/products.dart';
-import 'package:delivey/src/utils/my_colors.dart';
+
+import 'package:delivery/src/models/products.dart';
+import 'package:delivery/src/pages/client/produts/details/client_producst_details_controller.dart';
+import 'package:delivery/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:delivey/src/pages/client/produts/details/client_producst_details_controller.dart';
+
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 class ClientProdctsDetailsPages extends StatefulWidget {
   Products products;
-    ClientProdctsDetailsPages({Key key, @required this.products}): super(key: key);
+  ClientProdctsDetailsPages({Key key, @required this.products}): super(key: key);
   @override
   _ClientProdctsDetailsPagesState createState() => _ClientProdctsDetailsPagesState();
 }
@@ -65,19 +67,19 @@ class _ClientProdctsDetailsPagesState extends State<ClientProdctsDetailsPages> {
         children: [
 
           IconButton(onPressed: _con.additemc,
-              icon: Icon(Icons.add_circle_outline,
-                color: Colors.grey,
-                size: 30,
+            icon: Icon(Icons.add_circle_outline,
+              color: Colors.grey,
+              size: 30,
 
-              ),
+            ),
 
           ),
           Text('${_con.counter}',
-          style: TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.bold,
-            color: Colors.grey
-          ),
+            style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey
+            ),
           ),
           IconButton(onPressed: _con.removitemc,
             icon: Icon(Icons.remove_circle_outline,
@@ -112,7 +114,7 @@ class _ClientProdctsDetailsPagesState extends State<ClientProdctsDetailsPages> {
       child:  Row(
         children: [
           Image.asset('assets/img/delivery.png',
-          height: 17,
+            height: 17,
 
           ),
           SizedBox(width: 7,),
@@ -130,50 +132,50 @@ class _ClientProdctsDetailsPagesState extends State<ClientProdctsDetailsPages> {
 
   Widget _BottonAdd(){
     return Container(
-      margin: EdgeInsets.only(left: 30,right: 30,top: 30,bottom: 30),
-      child: ElevatedButton(
-        onPressed: _con.addToBag,
-        style: ElevatedButton.styleFrom(
-          primary: MyColors.prymaryColor,
-          padding: EdgeInsets.symmetric(vertical: 5),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12)
-          )
-            
+        margin: EdgeInsets.only(left: 30,right: 30,top: 30,bottom: 30),
+        child: ElevatedButton(
+          onPressed: _con.addToBag,
+          style: ElevatedButton.styleFrom(
+              primary: MyColors.prymaryColor,
+              padding: EdgeInsets.symmetric(vertical: 5),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)
+              )
 
-        ),
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.center,
-              child: Container(
+
+          ),
+          child: Stack(
+            children: [
+              Align(
                 alignment: Alignment.center,
-                height: 50,
-                child: Text(
-                  'Agregar a la Bolsa',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 50,
+                  child: Text(
+                      'Agregar a la Bolsa',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
 
-                  )
-                ),
-              ),
-            ),
-
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                margin: EdgeInsets.only(left: 50,top: 7),
-                height: 30,
-                child: Image.asset('assets/img/bag.png',
+                      )
+                  ),
                 ),
               ),
 
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  margin: EdgeInsets.only(left: 50,top: 7),
+                  height: 30,
+                  child: Image.asset('assets/img/bag.png',
+                  ),
+                ),
 
-            )
-          ],
-        ),
-      )
+
+              )
+            ],
+          ),
+        )
     );
   }
   Widget _TextDescSilder(){
@@ -238,11 +240,11 @@ class _ClientProdctsDetailsPagesState extends State<ClientProdctsDetailsPages> {
         ),
 
         Positioned(
-          left: 20,
+            left: 20,
             child: IconButton(
-          onPressed: _con.close,
-          icon: Icon(Icons.arrow_back_ios, color: MyColors.prymaryColor),
-        )
+              onPressed: _con.close,
+              icon: Icon(Icons.arrow_back_ios, color: MyColors.prymaryColor),
+            )
         )
       ],
     );

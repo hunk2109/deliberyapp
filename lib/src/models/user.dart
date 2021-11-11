@@ -1,7 +1,8 @@
 import 'dart:convert';
-import 'package:delivey/src/models/restaurant.dart';
-import 'package:delivey/src/models/roles.dart';
-import 'package:delivey/src/provider/restaurant_provider.dart';
+
+import 'package:delivery/src/models/restaurant.dart';
+import 'package:delivery/src/models/roles.dart';
+
 
 Users usersFromJson(String str) => Users.fromJson(json.decode(str));
 

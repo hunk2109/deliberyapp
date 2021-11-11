@@ -1,14 +1,16 @@
 import 'dart:async';
 
-import 'package:delivey/src/models/categories.dart';
-import 'package:delivey/src/models/user.dart';
-import 'package:delivey/src/provider/products_provider.dart';
-import 'package:delivey/src/provider/categories_provider.dart';
+
+import 'package:delivery/src/models/categories.dart';
+import 'package:delivery/src/models/products.dart';
+import 'package:delivery/src/models/user.dart';
+import 'package:delivery/src/pages/client/produts/details/client_products_details_page.dart';
+import 'package:delivery/src/provider/categories_provider.dart';
+import 'package:delivery/src/provider/products_provider.dart';
+import 'package:delivery/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
-import 'package:delivey/src/utils/shared_pref.dart';
-import 'package:delivey/src/models/products.dart';
-import 'package:delivey/src/pages/client/produts/details/client_producst_details_controller.dart';
-import 'package:delivey/src/pages/client/produts/details/client_products_details_page.dart';
+
+
 
 class ClientProductsListController{
   BuildContext context;
@@ -54,7 +56,7 @@ class ClientProductsListController{
     categories = await _categoriesProvider.getall();
     refresh();
   }
-  
+
   void openBottonSheet(Products products)
   {
     showModalBottomSheet(
@@ -91,16 +93,16 @@ class ClientProductsListController{
   }
   gotoRoles(){
     Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false) ;
-}
-gotoUpdate(){
+  }
+  gotoUpdate(){
     Navigator.pushNamed(context, 'client/update') ;
-}
-gotoOrdersList(){
+  }
+  gotoOrdersList(){
     Navigator.pushNamed(context, 'client/orders/list') ;
-}
+  }
 
-void gotocheckorder(){
-  Navigator.pushNamed(context, 'client/orders/create') ;
+  void gotocheckorder(){
+    Navigator.pushNamed(context, 'client/orders/create') ;
 
-}
+  }
 }

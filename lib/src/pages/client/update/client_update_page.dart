@@ -1,6 +1,8 @@
-import 'package:delivey/src/utils/my_colors.dart';
+
+import 'package:delivery/src/pages/client/update/client_update_controller.dart';
+import 'package:delivery/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:delivey/src/pages/client/update/client_update_controller.dart';
+
 import 'package:flutter/scheduler.dart';
 
 
@@ -29,22 +31,22 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
         title: Text('Editar Perfil'),
       ),
       body: Container(
-          width: double.infinity,
-          child:   SingleChildScrollView(
-      child: Column(
-      children: [
-      SizedBox(height: 30),
-      _ImgUser(),
-      _TextName(),
-      _TextLastName(),
-      _TextPhone(),
+        width: double.infinity,
+        child:   SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 30),
+              _ImgUser(),
+              _TextName(),
+              _TextLastName(),
+              _TextPhone(),
 
 
 
-      ],
+            ],
 
-    ),
-    ),
+          ),
+        ),
       ),
       bottomNavigationBar:       _ButtonRegister()
       ,
@@ -284,4 +286,3 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
     });
   }
 }
-

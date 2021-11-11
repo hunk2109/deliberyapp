@@ -1,10 +1,12 @@
-import 'package:delivey/src/models/orders.dart';
-import 'package:delivey/src/models/response_api.dart';
-import 'package:delivey/src/models/user.dart';
-import 'package:delivey/src/provider/order_provider.dart';
-import 'package:delivey/src/utils/my_colors.dart';
-import 'package:delivey/src/utils/mysnackbar.dart';
-import 'package:delivey/src/utils/shared_pref.dart';
+
+import 'package:delivery/src/api/enviroment.dart';
+import 'package:delivery/src/models/orders.dart';
+import 'package:delivery/src/models/response_api.dart';
+import 'package:delivery/src/models/user.dart';
+import 'package:delivery/src/provider/order_provider.dart';
+import 'package:delivery/src/utils/my_colors.dart';
+import 'package:delivery/src/utils/mysnackbar.dart';
+import 'package:delivery/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
@@ -12,7 +14,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 import 'package:location/location.dart' as location;
-import 'package:delivey/src/api/enviroment.dart';
+
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:geolocator/geolocator.dart';

@@ -1,8 +1,9 @@
-import 'package:delivey/src/utils/my_colors.dart';
-import 'package:delivey/src/widgets/no_data_widgets.dart';
+
+import 'package:delivery/src/pages/client/address/maps/client_address_map_controller.dart';
+import 'package:delivery/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:delivey/src/pages/client/address/maps/client_address_map_controller.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ClientAddrressMaptePage extends StatefulWidget {
@@ -47,8 +48,8 @@ class _ClientAddrressMaptePageState extends State<ClientAddrressMaptePage> {
           ),
           Container(
             alignment: Alignment.topCenter,
-             margin: EdgeInsets.only(top:30),
-             child: _carAddress(),
+            margin: EdgeInsets.only(top:30),
+            child: _carAddress(),
           ),
           Container(
             alignment:  Alignment.bottomCenter,
@@ -90,21 +91,21 @@ class _ClientAddrressMaptePageState extends State<ClientAddrressMaptePage> {
     );
   }
   Widget _carAddress(){
-   return  Container(
+    return  Container(
       child: Card(
         color: Colors.grey[800],
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20)
+            borderRadius: BorderRadius.circular(20)
         ),
         child: Container(
           padding:  EdgeInsets.symmetric(horizontal: 20,vertical: 15),
           child: Text(_con.addressName ??'',
-          style:  TextStyle(
-            color: Colors.white,
-            fontSize: 14,
-            fontWeight: FontWeight.bold
+            style:  TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.bold
 
-          ),),
+            ),),
         ),
       ),
     );

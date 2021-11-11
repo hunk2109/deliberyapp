@@ -1,11 +1,13 @@
-import 'package:delivey/src/models/address.dart';
-import 'package:delivey/src/models/user.dart';
-import 'package:delivey/src/provider/address_provider.dart';
-import 'package:delivey/src/utils/mysnackbar.dart';
-import 'package:delivey/src/utils/shared_pref.dart';
+
+import 'package:delivery/src/models/address.dart';
+import 'package:delivery/src/models/response_api.dart';
+import 'package:delivery/src/models/user.dart';
+import 'package:delivery/src/pages/client/address/maps/client_address_map_page.dart';
+import 'package:delivery/src/provider/address_provider.dart';
+import 'package:delivery/src/utils/mysnackbar.dart';
+import 'package:delivery/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
-import 'package:delivey/src/pages/client/address/maps/client_address_map_page.dart';
-import 'package:delivey/src/models/response_api.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -36,7 +38,6 @@ class ClientAdrresCreateController{
         _position.longitude,
         order.address.lat,
         order.address.lng
-
     );*/
   void createeAddress() async {
     String addresstxt = adressController.text;
@@ -54,11 +55,11 @@ class ClientAdrresCreateController{
 
     Address address = new Address(
 
-      address: addresstxt,
-      neightborhood: neighborotxt,
-      lat: lat,
-      lng: lng,
-      idUser: users.id
+        address: addresstxt,
+        neightborhood: neighborotxt,
+        lat: lat,
+        lng: lng,
+        idUser: users.id
 
     );
 
@@ -76,7 +77,7 @@ class ClientAdrresCreateController{
   }
 
   void openmap() async {
-        pointRef = await  showModalBottomSheet(
+    pointRef = await  showModalBottomSheet(
         isScrollControlled: true,
         isDismissible: false,
         enableDrag: false,
@@ -84,9 +85,9 @@ class ClientAdrresCreateController{
         builder: (context) => ClientAddrressMaptePage()
     );
 
-        if(pointRef != null){
-          referenController.text = pointRef['address'];
-        }
+    if(pointRef != null){
+      referenController.text = pointRef['address'];
+    }
   }
 
 }

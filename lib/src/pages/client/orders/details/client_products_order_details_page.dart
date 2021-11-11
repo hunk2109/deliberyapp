@@ -1,13 +1,12 @@
-import 'package:delivey/src/models/orders.dart';
-import 'package:delivey/src/models/products.dart';
-import 'package:delivey/src/models/user.dart';
-import 'package:delivey/src/pages/client/orders/details/client_products_details_controller.dart';
-import 'package:delivey/src/pages/delibery/orders/details/delibery_products_details_controller.dart';
-import 'package:delivey/src/utils/my_colors.dart';
-import 'package:delivey/src/widgets/no_data_widgets.dart';
+
+import 'package:delivery/src/models/orders.dart';
+import 'package:delivery/src/models/products.dart';
+import 'package:delivery/src/pages/client/orders/details/client_products_details_controller.dart';
+import 'package:delivery/src/utils/relative_time_util.dart';
+import 'package:delivery/src/widgets/no_data_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:delivey/src/utils/relative_time_util.dart';
+
 
 class ClientOrdersDetailsPage extends StatefulWidget {
   Order order;

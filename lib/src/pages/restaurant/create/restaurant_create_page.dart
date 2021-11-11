@@ -1,7 +1,9 @@
-import 'package:delivey/src/models/biscategory.dart';
-import 'package:delivey/src/utils/my_colors.dart';
+
+import 'package:delivery/src/models/biscategory.dart';
+import 'package:delivery/src/pages/restaurant/create/reesurant_create_controller.dart';
+import 'package:delivery/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:delivey/src/pages/restaurant/create/reesurant_create_controller.dart';
+
 import 'package:flutter/scheduler.dart';
 
 
