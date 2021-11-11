@@ -1,15 +1,14 @@
 
-import 'package:delivery/src/models/address.dart';
-import 'package:delivery/src/models/response_api.dart';
-import 'package:delivery/src/models/user.dart';
-import 'package:delivery/src/pages/client/address/maps/client_address_map_page.dart';
-import 'package:delivery/src/provider/address_provider.dart';
-import 'package:delivery/src/utils/mysnackbar.dart';
-import 'package:delivery/src/utils/shared_pref.dart';
+import 'package:delibery/src/models/address.dart';
+import 'package:delibery/src/models/response_api.dart';
+import 'package:delibery/src/models/user.dart';
+import 'package:delibery/src/pages/client/address/maps/client_address_map_page.dart';
+import 'package:delibery/src/provider/address_provider.dart';
+import 'package:delibery/src/utils/mysnackbar.dart';
+import 'package:delibery/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:geolocator/geolocator.dart';
 
 
 class ClientAdrresCreateController{

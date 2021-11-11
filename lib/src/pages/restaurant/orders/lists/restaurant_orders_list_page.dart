@@ -1,9 +1,10 @@
 
-import 'package:delivery/src/models/orders.dart';
-import 'package:delivery/src/pages/restaurant/orders/lists/restaurant_orders_list_controller.dart';
-import 'package:delivery/src/utils/my_colors.dart';
-import 'package:delivery/src/utils/relative_time_util.dart';
-import 'package:delivery/src/widgets/no_data_widgets.dart';
+
+import 'package:delibery/src/models/orders.dart';
+import 'package:delibery/src/pages/restaurant/orders/lists/restaurant_orders_list_controller.dart';
+import 'package:delibery/src/utils/my_colors.dart';
+import 'package:delibery/src/utils/relative_time_util.dart';
+import 'package:delibery/src/widgets/no_data_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -284,13 +285,13 @@ class _RestaurantOrdersListPage  extends State<RestaurantOrdersListPage > {
                   onTap: _con.gotocategoriscreated,
           ),
           _con.users != null ?
-          _con.users.idRestaurant.length < 1?
+          _con.users.idRestaurant == null?
           ListTile(
             title: Text('Crear Negocio'),
             trailing: Icon(Icons.list_alt),
             onTap: _con.gotoCreateRest,
           ):Container():Container(),
-          _con.users != null ?
+          _con.users.idRestaurant != null ?
           _con.users.idRestaurant.length >= 1?
           ListTile(
             title: Text('Crear Producto'),

@@ -1,7 +1,7 @@
 
-import 'package:delivery/src/models/products.dart';
-import 'package:delivery/src/pages/client/produts/details/client_producst_details_controller.dart';
-import 'package:delivery/src/utils/my_colors.dart';
+import 'package:delibery/src/models/products.dart';
+import 'package:delibery/src/pages/client/produts/details/client_producst_details_controller.dart';
+import 'package:delibery/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/scheduler.dart';

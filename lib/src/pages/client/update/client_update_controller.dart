@@ -1,10 +1,11 @@
 import 'dart:convert';
 
-import 'package:delivery/src/models/response_api.dart';
-import 'package:delivery/src/models/user.dart';
-import 'package:delivery/src/provider/user_provider.dart';
-import 'package:delivery/src/utils/mysnackbar.dart';
-import 'package:delivery/src/utils/shared_pref.dart';
+
+import 'package:delibery/src/models/response_api.dart';
+import 'package:delibery/src/models/user.dart';
+import 'package:delibery/src/provider/user_provider.dart';
+import 'package:delibery/src/utils/mysnackbar.dart';
+import 'package:delibery/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
