@@ -234,7 +234,7 @@ class _RestaurantOrdersListPage  extends State<RestaurantOrdersListPage > {
                     maxLines: 1,
                   ),
                   Text(
-                    _con.users?.email,
+                    '${_con.users?.email}',
                     style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey[300],
@@ -243,7 +243,7 @@ class _RestaurantOrdersListPage  extends State<RestaurantOrdersListPage > {
                     maxLines: 1,
                   ),
                   Text(
-                    _con.users?.phone,
+                    '${_con.users?.phone}',
                     style: TextStyle(
                         fontSize: 10,
                         color: Colors.grey[200],
