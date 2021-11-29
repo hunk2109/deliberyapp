@@ -169,7 +169,7 @@ class _RestaurantOrdersListPage  extends State<RestaurantOrdersListPage > {
                       margin: EdgeInsets.symmetric(vertical: 5),
                       width: double.infinity,
                       child: Text(
-                        'Ciente: ${order.client?.name??''} ${order.client?.lastname??''}',
+                        'Cliente: ${order.client?.name??''} ${order.client?.lastname??''}',
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontSize: 13,

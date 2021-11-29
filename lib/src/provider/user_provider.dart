@@ -50,6 +50,7 @@ class UserProvider{
 
       final  data = json.decode(res.body);
       Users user = Users.fromJson(data);
+      print(user);
       return user;
     }
     catch(e){

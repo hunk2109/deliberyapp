@@ -51,7 +51,7 @@ class Order {
   factory Order.fromJson(Map<String, dynamic> json) => Order(
     id: json["id"] is int ?  json["id"].toString():  json["id"],
     idClient: json["id_client"],
-    idDelibery: json["id_delibery"],
+    idDelibery: json["id_delibery"]is int ?  json["id_delibery"].toString():  json["id_delibery"],
     idAddress: json["id_address"],
     idRestaurant: json["id_restaurant"],
     restName: json["rest_name"],

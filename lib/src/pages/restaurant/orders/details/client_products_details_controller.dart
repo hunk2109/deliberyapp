@@ -53,9 +53,11 @@ class RestaurantOrdersDetailsController{
   }
   void updateOrder() async{
     if(idDelibery != null){
+      print(idDelibery);
       order.idDelibery = idDelibery;
       ResponseApi responseApi = await _orderProvider.update(order);
       Users deliberyUser = await _usersProvider.getByid(order.idDelibery);
+      print('Delibery ${deliberyUser.notificationToken}');
       print('Token: ${deliberyUser.notificationToken}');
       sendNotifications(deliberyUser.notificationToken);
       Fluttertoast.showToast(msg: responseApi.message,toastLength: Toast.LENGTH_LONG);
